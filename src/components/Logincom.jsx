@@ -9,55 +9,62 @@ const Logincom = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
+        // Validar el correo electrónico
         if (!correo.includes('@')) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Correo electrónico inválido,por favor ingresar@!",
+                text: "Correo electrónico inválido, por favor ingresar @!",
             });
             return;
         }
+
         try {
-            const userExists = await getData();
-            const user = userExists.find((user) => user.gmail === correo);
-            if (user) {
-                if (user.contrasena === contrasena) {
-                    console.log("Usuario existe");
-                    if ("admin" === user.tipe) {
-                        navigate('/Administrador');
-                    } else {
-                        navigate('/TodosLosProductos');
-                    }
-                } else {
+            // Enviar la solicitud POST al backend de Django
+            const response = await fetch('http://localhost:8000/api/user/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    email: correo,
+                    password: contrasena,
+                }),
+               });
 
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Contraseña incorrecta!",
+            // Si el login es exitoso
+            if (response.ok) {
 
-                    });
-                }
+                // Mostrar mensaje de éxito con SweetAlert2
+                Swal.fire({
+                    icon: "success",
+                    title: "Login exitoso",
+                    text: "Has iniciado sesión correctamente",
+                });
+
             } else {
-                console.log("Usuario no existe");
+                // Si hay algún error en la respuesta (ej: credenciales incorrectas)
+                const errorData = await response.json();
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "Usuario no existe!",
-
+                    text: errorData.error || "Error al intentar iniciar sesión",
                 });
-
             }
-        } catch (error) {
-            console.error("Error al verificar usuario:", error);
 
+        } catch (error) {
+            // Capturar cualquier error al intentar conectar con el backend
+            console.error("Error al intentar iniciar sesión:", error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Error al intentar iniciar sesión!",
-
             });
         }
     };
+
 
     return (
         <div className="container">
