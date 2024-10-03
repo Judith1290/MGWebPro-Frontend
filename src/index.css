@@ -1,0 +1,44 @@
+input,
+textarea {
+    border: 2px solid transparent;
+    /* Bordes transparentes inicialmente */
+    padding: 10px;
+    /* Espaciado interno */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    transition: border-color 0.3s;
+    /* Transición suave */
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    /* Quitar el contorno por defecto */
+    border-color: #00ffcc;
+    /* Color del borde neón al enfocar */
+    box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc;
+    /* Efecto de sombra para el neón */
+}
+
+/* Añadimos estilos para la animación de neón */
+.animacion {
+    animation: neon-glow 2s infinite;
+    /* Animación neón */
+}
+
+@keyframes neon-glow {
+    0% {
+        border-color: #00ffcc;
+        /* Color inicial */
+    }
+
+    50% {
+        border-color: #ffff00;
+        /* Color intermedio */
+    }
+
+    100% {
+        border-color: #00ffcc;
+        /* Color final */
+    }
+}

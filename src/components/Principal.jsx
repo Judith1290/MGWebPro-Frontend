@@ -11,7 +11,7 @@ function Principal() {
 
             </div>
             <div className="container my-4 text-center"> 
-                <div className="mx-auto" style={{ maxWidth: '800px' }}> {/* Ajustar el ancho  */}
+                <div className="mx-auto" style={{ maxWidth: '900px' }}> {/* Ajustar el ancho  */}
                     <Carrusel />
                 </div>
             </div>
