@@ -67,37 +67,40 @@ const Logincom = () => {
 
 
     return (
-        <div className="container">
-            <div className="card">
-                <h2 className="title">Iniciar Sesión</h2>
-                <p className="subtitle">¿No tienes una cuenta? <Link to="/Register" className="link">Regístrate</Link></p>
-                <form onSubmit={handleLogin}>
-                    <div className="mb-4">
-                        <label htmlFor="correo" className="block text-sm font-medium">Correo Electrónico</label>
-                        <input
-                            type="text"
-                            id="correo"
-                            className="input"
-                            placeholder="tucorreo@example.com"
-                            value={correo}
-                            onChange={(e) => setCorreo(e.target.value)}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="contrasena" className="block text-sm font-medium">Contraseña</label>
-                        <input
-                            type="password"
-                            id="contrasena"
-                            className="input"
-                            placeholder="Ingrese 6 caracteres o más"
-                            value={contrasena}
-                            onChange={(e) => setContrasena(e.target.value)}
-                        />
-                    </div>
-                    <button type="submit" className="button">Inicio</button>
-                </form>
+        <div className="d-flex justify-content-center align-items-center vh-100">
+    <div className="card p-4 shadow-sm" style={{ width: '100%', maxWidth: '400px', borderRadius: '15px' }}>
+        <h2 className="text-center mb-4">Iniciar Sesión</h2>
+        <p className="text-center mb-4">
+            ¿No tienes una cuenta? <Link to="/Register" className="link">Regístrate</Link>
+        </p>
+        <form onSubmit={handleLogin}>
+            <div className="mb-3">
+                <label htmlFor="correo" className="form-label">Correo Electrónico</label>
+                <input
+                    type="text"
+                    id="correo"
+                    className="form-control input-neon"
+                    placeholder="tucorreo@example.com"
+                    value={correo}
+                    onChange={(e) => setCorreo(e.target.value)}
+                />
             </div>
-        </div>
+            <div className="mb-3">
+                <label htmlFor="contrasena" className="form-label">Contraseña</label>
+                <input
+                    type="password"
+                    id="contrasena"
+                    className="form-control input-neon"
+                    placeholder="Ingrese 6 caracteres o más"
+                    value={contrasena}
+                    onChange={(e) => setContrasena(e.target.value)}
+                />
+            </div>
+            <button type="submit" className="btn btn-primary w-100">Iniciar</button>
+        </form>
+    </div>
+</div>
+
     );
 };
 

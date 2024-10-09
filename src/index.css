@@ -1,3 +1,5 @@
+/* pagina de conctacto */
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 input,
 textarea {
     border: 2px solid transparent;
@@ -42,3 +44,17 @@ textarea:focus {
         /* Color final */
     }
 }
+
+/* pagina de registro */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+.input-neon:focus {
+    outline: none !important;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.4) !important;
+    border-color: rgba(0, 255, 255, 0.7) !important;
+    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
+}
+
+.input-neon {
+    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
+}
+
