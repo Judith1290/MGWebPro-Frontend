@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
+import { IKContext, IKUpload } from 'imagekitio-react';
 
 function Administrador() {
+    const [stock, setStock] = useState('');
+    const [desc, setDesc] = useState('');
+    const [nombre, setNombre] = useState('');
     const [modelo, setModelo] = useState('');
     const [precio, setPrecio] = useState('');
     const [categoria, setCategoria] = useState('');
@@ -11,9 +14,11 @@ function Administrador() {
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
     const [imageUrl, setImageUrl] = useState('');
+    const [modelos, setModelos] = useState([]);
+    const [categorias, setCategorias] = useState([]);
 
     const handleImageUploadSuccess = (response) => {
-        setImageUrl(response.url); // Guarda la URL de la imagen cargada
+        setImageUrl(response.url);
         Swal.fire({
             icon: 'success',
             title: 'Imagen cargada exitosamente',
@@ -32,7 +37,7 @@ function Administrador() {
 
     const fetchProductos = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/product/'); 
+            const response = await fetch('http://localhost:8000/api/product/');
             const data = await response.json();
             setProductos(data);
         } catch (error) {
@@ -40,11 +45,43 @@ function Administrador() {
         }
     };
 
+    const fetchModelosYCategorias = async () => {
+        try {
+            const responseModelos = await fetch('http://localhost:8000/api/model/');
+            const dataModelos = await responseModelos.json();
+            setModelos(dataModelos);
+
+            const responseCategorias = await fetch('http://localhost:8000/api/category/');
+            const dataCategorias = await responseCategorias.json();
+            setCategorias(dataCategorias);
+        } catch (error) {
+            console.error('Error fetching models and categories:', error);
+        }
+    };
+
+    const authenticator = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/api/imagekit-auth/');
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+            }
+            const data = await response.json();
+            const { signature, expire, token } = data;
+            return { signature, expire, token };
+        } catch (error) {
+            throw new Error(`Authentication request failed: ${error.message}`);
+        }
+    };
+
     const handleSubmit = async () => {
         const productData = {
-            modelo,
-            precio,
-            categoria,
+            producto_nombre: nombre,
+            producto_descripcion: desc,
+            stock: stock,
+            modelo: modelo,
+            precio: precio,
+            categoria: categoria,
             imagen: imageUrl,
         };
 
@@ -59,6 +96,7 @@ function Administrador() {
                 })
                 : await fetch('http://localhost:8000/api/product/', {
                     method: 'POST',
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -66,7 +104,6 @@ function Administrador() {
                 });
 
             if (response.ok) {
-                const data = await response.json();
                 Swal.fire({
                     icon: 'success',
                     title: isEditing ? 'Producto actualizado' : 'Producto agregado',
@@ -106,7 +143,8 @@ function Administrador() {
     };
 
     useEffect(() => {
-        fetchProductos();
+        fetchModelosYCategorias();
+        fetchProductos(); 
     }, []);
 
     return (
@@ -118,13 +156,8 @@ function Administrador() {
                         <IKContext
                             publicKey="public_jQbYnV75+ohlENFlgG1cAyQdQA4="
                             urlEndpoint="https://ik.imagekit.io/MGWebPro"
-                            transformationPosition="path"
-                            authenticationEndpoint="http://www.yourserver.com/auth"
+                            authenticator={authenticator}
                         >
-                            <IKImage
-                                path={imageUrl}
-                                transformation={[{ height: "300", width: "400" }]}
-                            />
                             <IKUpload
                                 fileName="my-upload"
                                 onError={handleImageUploadError}
@@ -135,29 +168,49 @@ function Administrador() {
                     <div>
                         <select className='inputField' value={modelo} onChange={(e) => setModelo(e.target.value)}>
                             <option className='option' value="">Selecciona el modelo</option>
-                            <option className='option' value="samsung">Samsung</option>
-                            <option className='option' value="huawei">Huawei</option>
-                            <option className='option' value="iphone">iPhone</option>
-                            <option className='option' value="xiaomi">Xiaomi</option>
+                            {modelos.map((modelo) => (
+                                <option key={modelo.modelo_id} className='option' value={modelo.modelo_id}>
+                                    {modelo.nombre_modelo}
+                                </option>
+                            ))}
                         </select>
                         <select className='inputField' value={categoria} onChange={(e) => setCategoria(e.target.value)}>
                             <option className='option' value="">Selecciona la categoría</option>
-                            <option className='option' value="Cargadores">Cargadores</option>
-                            <option className='option' value="Cables USB">Cables USB</option>
-                            <option className='option' value="Cubo">Cubo</option>
-                            <option className='option' value="Temperados">Temperados</option>
-                            <option className='option' value="AROS DE LUZ">AROS DE LUZ</option>
-                            <option className='option' value="Audifono">Audifono</option>
-                            <option className='option' value="Celulares">Celulares</option>
+                            {categorias.map((categoria) => (
+                                <option key={categoria.categoria_id} className='option' value={categoria.categoria_id}>
+                                    {categoria.nombre_categoria}
+                                </option>
+                            ))}
                         </select>
-                        <input className='inputField' type='number' placeholder='Precio en CR' value={precio} onChange={(e) => setPrecio(e.target.value)} />
-                        <input onClick={handleSubmit} className='submitButton' type="button" value={isEditing ? "Actualizar" : "Agregar"} />
-                        {isEditing && (
-                            <input onClick={() => setIsEditing(false)} className='closeButton' type="button" value="Cancelar" />
-                        )}
+
+                        <input className='inputField' type='number' placeholder='stock' onChange={(e) => setStock(e.target.value)} />
+                        <input className='inputField' placeholder='descripcion' onChange={(e) => setDesc(e.target.value)} />
+                        <input className='inputField' placeholder='nombre' onChange={(e) => setNombre(e.target.value)} />
+                        <input className='inputField' type='number' placeholder='precio' onChange={(e) => setPrecio(e.target.value)} />
                     </div>
-                    <button variant="outline-success"><Link to='/'>Regresar</Link></button>
+                    <button className='submitButton' onClick={handleSubmit}>{isEditing ? 'Actualizar' : 'Agregar'}</button>
                 </div>
+            </div>
+
+            {/* Lista de productos */}
+            <div className='productList'>
+                <h2>Lista de Productos</h2>
+                {productos.length > 0 ? (
+                    productos.map((producto) => (
+                        <div key={producto.producto_id} className='productItem'>
+                            <h3>{producto.producto_nombre}</h3>
+                            <p>Descripción: {producto.producto_descripcion}</p>
+                            <p>Modelo: {producto.modelo}</p>
+                            <p>Precio: {producto.precio} CRC</p>
+                            <p>Stock: {producto.stock}</p>
+                            <p>Categoría: {producto.categoria}</p>
+                            <img src={producto.imagen} alt={producto.producto_nombre} className='productImage' />
+                            <button onClick={() => handleEdit(producto)}>Editar</button>
+                        </div>
+                    ))
+                ) : (
+                    <p>No hay productos disponibles.</p>
+                )}
             </div>
         </div>
     );

@@ -9,9 +9,8 @@ const Carrusel = () => {
         { src: "/img/imagen1.png", alt:"SET DIJES" },
         { src: "img/imagen2.png", alt: "SET DIJES" },
         { src: "img/imagen3.png", alt: "SET DIJES" },
+        ]
         
-
-    ]
     return (
         <div>
 
