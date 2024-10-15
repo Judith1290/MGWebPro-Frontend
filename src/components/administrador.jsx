@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { IKContext, IKUpload } from 'imagekitio-react';
 
+
 function Administrador() {
     const [stock, setStock] = useState('');
     const [desc, setDesc] = useState('');
@@ -37,7 +38,7 @@ function Administrador() {
 
     const fetchProductos = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/product/');
+            const response = await fetch('http://localhost:8000/api/inventory/products/');
             const data = await response.json();
             setProductos(data);
         } catch (error) {
@@ -47,11 +48,11 @@ function Administrador() {
 
     const fetchModelosYCategorias = async () => {
         try {
-            const responseModelos = await fetch('http://localhost:8000/api/model/');
+            const responseModelos = await fetch('http://localhost:8000/api/inventory/models/');
             const dataModelos = await responseModelos.json();
             setModelos(dataModelos);
 
-            const responseCategorias = await fetch('http://localhost:8000/api/category/');
+            const responseCategorias = await fetch('http://localhost:8000/api/inventory/categories/');
             const dataCategorias = await responseCategorias.json();
             setCategorias(dataCategorias);
         } catch (error) {
@@ -76,6 +77,7 @@ function Administrador() {
 
     const handleSubmit = async () => {
         const productData = {
+            imagen: imageUrl,
             producto_nombre: nombre,
             producto_descripcion: desc,
             stock: stock,
@@ -87,22 +89,24 @@ function Administrador() {
 
         try {
             const response = isEditing
-                ? await fetch(`http://localhost:8000/api/product/${editingId}/`, {
+                ? await fetch('http://localhost:8000/api/inventory/products/${editingId}/', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(productData),
                 })
-                : await fetch('http://localhost:8000/api/product/', {
+                    : await fetch('http://localhost:8000/api/inventory/products/', {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(productData),
-                });
 
+                });
+            console.log(productData);
+            console.log("Editing ID:", editingId);
             if (response.ok) {
                 Swal.fire({
                     icon: 'success',
@@ -114,7 +118,7 @@ function Administrador() {
                 setCategoria('');
                 setImageUrl('');
                 setIsEditing(false);
-                fetchProductos(); // Refresca la lista de productos
+                fetchProductos(); 
             } else {
                 const errorData = await response.json();
                 Swal.fire({
@@ -144,15 +148,15 @@ function Administrador() {
 
     useEffect(() => {
         fetchModelosYCategorias();
-        fetchProductos(); 
+        fetchProductos();
     }, []);
 
     return (
-        <div className='administrador'>
-            <div className='formContainer'>
-                <h2>{isEditing ? 'Editar Producto' : 'Agregar Producto'}</h2>
-                <div className='formSection'>
-                    <div className='imageContainer'>
+        <div className="administrador-container container mt-5 p-4">
+            <div className="administrador-form formContainer">
+                <h2 className="text-center mb-4">{isEditing ? 'Editar Producto' : 'Agregar Producto'}</h2>
+                <div className="formSection row">
+                    <div className="imageContainer col-md-6 mb-2">
                         <IKContext
                             publicKey="public_jQbYnV75+ohlENFlgG1cAyQdQA4="
                             urlEndpoint="https://ik.imagekit.io/MGWebPro"
@@ -162,58 +166,58 @@ function Administrador() {
                                 fileName="my-upload"
                                 onError={handleImageUploadError}
                                 onSuccess={handleImageUploadSuccess}
+                                className="form-control inputField"
                             />
                         </IKContext>
                     </div>
-                    <div>
-                        <select className='inputField' value={modelo} onChange={(e) => setModelo(e.target.value)}>
-                            <option className='option' value="">Selecciona el modelo</option>
+                    <div className="col-md-6">
+                        <select className="form-control mb-3 inputField" value={modelo} onChange={(e) => setModelo(parseInt(e.target.value))}>
+                            <option value="">Selecciona el modelo</option>
                             {modelos.map((modelo) => (
-                                <option key={modelo.modelo_id} className='option' value={modelo.modelo_id}>
+                                <option key={modelo.modelo_id} value={modelo.modelo_id}>
                                     {modelo.nombre_modelo}
                                 </option>
                             ))}
                         </select>
-                        <select className='inputField' value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-                            <option className='option' value="">Selecciona la categoría</option>
+                        <select className="form-control mb-3 inputField" value={categoria} onChange={(e) => setCategoria(parseInt(e.target.value))}>
+                            <option value="">Selecciona la categoría</option>
                             {categorias.map((categoria) => (
-                                <option key={categoria.categoria_id} className='option' value={categoria.categoria_id}>
+                                <option key={categoria.categoria_id} value={categoria.categoria_id}>
                                     {categoria.nombre_categoria}
                                 </option>
                             ))}
                         </select>
-
-                        <input className='inputField' type='number' placeholder='stock' onChange={(e) => setStock(e.target.value)} />
-                        <input className='inputField' placeholder='descripcion' onChange={(e) => setDesc(e.target.value)} />
-                        <input className='inputField' placeholder='nombre' onChange={(e) => setNombre(e.target.value)} />
-                        <input className='inputField' type='number' placeholder='precio' onChange={(e) => setPrecio(e.target.value)} />
+                        <input className="form-control mb-3 inputField" type="number" placeholder="Stock" value={stock} onChange={(e) => setStock(parseInt(e.target.value))} />
+                        <input className="form-control mb-3 inputField" placeholder="Descripción" value={desc} onChange={(e) => setDesc(e.target.value)} />
+                        <input className="form-control mb-3 inputField" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                        <input className="form-control mb-3 inputField" type="number" placeholder="Precio" value={precio} onChange={(e) => setPrecio(parseInt(e.target.value))} />
+                        <button className="btn btn-primary btn-block neon-effect" onClick={handleSubmit}>{isEditing ? 'Actualizar' : 'Agregar'}</button>
                     </div>
-                    <button className='submitButton' onClick={handleSubmit}>{isEditing ? 'Actualizar' : 'Agregar'}</button>
                 </div>
             </div>
 
-            {/* Lista de productos */}
-            <div className='productList'>
-                <h2>Lista de Productos</h2>
+            <div className="productList mt-5">
+                <h2 className="text-center mb-4">Lista de Productos</h2>
                 {productos.length > 0 ? (
                     productos.map((producto) => (
-                        <div key={producto.producto_id} className='productItem'>
+                        <div key={producto.producto_id} className="productItem administrador-product">
                             <h3>{producto.producto_nombre}</h3>
+                            <img src={producto.imagen} alt={producto.producto_nombre} className="productImage img-fluid" />
                             <p>Descripción: {producto.producto_descripcion}</p>
                             <p>Modelo: {producto.modelo}</p>
                             <p>Precio: {producto.precio} CRC</p>
                             <p>Stock: {producto.stock}</p>
-                            <p>Categoría: {producto.categoria}</p>
-                            <img src={producto.imagen} alt={producto.producto_nombre} className='productImage' />
-                            <button onClick={() => handleEdit(producto)}>Editar</button>
+                            <button className="btn btn-light neon-effect" onClick={() => handleEdit(producto)}>Editar</button>
                         </div>
                     ))
                 ) : (
-                    <p>No hay productos disponibles.</p>
+                    <p className="text-center">No hay productos disponibles.</p>
                 )}
             </div>
         </div>
     );
+
 }
 
 export default Administrador;
+
