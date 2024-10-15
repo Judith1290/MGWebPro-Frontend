@@ -38,7 +38,7 @@ const Register = () => {
                 password: contraseña,
             };
 
-            const response = await postData('http://localhost:8000/api/user/register/', payload);
+            const response = await postData('http://localhost:8000/api/users/register/', payload);
 
             if (response) {
                 Swal.fire({

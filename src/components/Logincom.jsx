@@ -22,7 +22,7 @@ const Logincom = () => {
 
         try {
             // Enviar la solicitud POST al backend de Django
-            const response = await fetch('http://localhost:8000/api/user/login/', {
+            const response = await fetch('http://localhost:8000/api/users/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

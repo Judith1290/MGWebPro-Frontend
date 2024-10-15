@@ -3,40 +3,34 @@
 input,
 textarea {
     border: 2px solid transparent;
-    /* Bordes transparentes inicialmente */
     padding: 10px;
-    /* Espaciado interno */
     border-radius: 8px;
-    /* Bordes redondeados */
     transition: border-color 0.3s;
-    /* Transición suave */
+   
 }
 
 input:focus,
 textarea:focus {
     outline: none;
-    /* Quitar el contorno por defecto */
     border-color: #00ffcc;
-    /* Color del borde neón al enfocar */
     box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc;
-    /* Efecto de sombra para el neón */
 }
 
-/* Añadimos estilos para la animación de neón */
+
 .animacion {
     animation: neon-glow 2s infinite;
-    /* Animación neón */
+   
 }
 
 @keyframes neon-glow {
     0% {
         border-color: #00ffcc;
-        /* Color inicial */
+       
     }
 
     50% {
         border-color: #ffff00;
-        /* Color intermedio */
+        
     }
 
     100% {
@@ -58,4 +52,126 @@ textarea:focus {
     transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
 }
 
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* Fondo principal */
+.administrador-container {
+    background-color: #f0f8ff; 
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+ 
+  .administrador-form {
+    background-color: rgba(255, 255, 255, 0.5); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+ 
+  .administrador-form .form-control {
+    background-color: transparent; 
+    border: 2px solid #40e0d0; 
+    color: #000; 
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+
+  .administrador-form .form-control:focus {
+    background-color: transparent; 
+    box-shadow: 0px 0px 15px #40e0d0; 
+    outline: none;
+  }
+  
+ 
+  .administrador-form button {
+    background-color: #800080; 
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+ 
+  .administrador-form button:hover {
+    background-color: #9932cc; 
+  }
+
+  /* Producto individual en la lista de nuevos productos */
+
+.productSection {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  
+  .productSection h2 {
+    color: #000; 
+    margin-bottom: 20px; 
+  }
+  
+ 
+  .productList {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    gap: 20px; 
+    margin-bottom: 20px;
+  }
+  
+  /* Producto individual en la lista de nuevos productos */
+  .productItem {
+    background-color: #ffffff; 
+    padding: 10px; 
+    border-radius: 8px; 
+    margin-bottom: 10px; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: #000; 
+    text-align: center;
+    width: 200px; 
+  }
+  
+  /* Estilo de la tarjeta de producto */
+  .administrador-product {
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 15px; 
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 15px; 
+    color: #000; 
+    width: 220px; 
+  }
+  
+  /* Estilo de la imagen del producto */
+  .administrador-product img {
+    max-width: 100%;
+    border-radius: 8px; /* Ajustar el radio del borde de la imagen */
+  }
+  
+ 
+  .administrador-product h3 {
+    color: #000; 
+    text-transform: uppercase;
+    font-size: 16px; 
+  }
+  
+ 
+  .administrador-product p {
+    color: #000;
+    font-size: 12px; 
+    text-align: center;
+  }
+  
+  
+  
+  
+  
+  
 
