@@ -1,50 +1,54 @@
+import React, { useContext, useState } from 'react';
+import { ProductContext } from './ProductContext'; 
+import NavBar from './navbar';
+import Carrusel from './Carrusel'; 
+import { FaShoppingCart, FaCreditCard, FaStar } from 'react-icons/fa';
 
-import Carrusel from './Carrusel';
+const Principal = () => {
+    const { productos } = useContext(ProductContext); 
+    const [searchTerm, setSearchTerm] = useState('');
 
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ProductContext } from './ProductContext';
-import { FaShoppingCart, FaCreditCard, FaStar } from 'react-icons/fa'; 
+    // Función para manejar el término de búsqueda
+    const handleSearch = (term) => {
+        setSearchTerm(term);
+    };
 
+    // Filtrar productos según el término de búsqueda
+    const filteredProductos = productos.filter(producto => 
+        producto.producto_nombre && 
+        producto.producto_nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-function Principal() {
-    // Acceder a los productos desde el contexto
-    const { productos } = useContext(ProductContext);  
-    const navigate = useNavigate();
-
+    // Funciones para manejar acciones
     const handleAddToCart = (producto) => {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(producto);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert(`Agregaste ${producto.producto_nombre} al carrito.`);
+        // Lógica para agregar el producto al carrito
+        console.log('Producto agregado al carrito:', producto);
     };
 
     const handleGoToPayment = () => {
-        navigate('');
+        // Lógica para ir al proceso de pago
+        console.log('Ir a pago');
     };
 
     const handleGoToResena = () => {
-        navigate('');
+        // Lógica para ir a reseñas
+        console.log('Ir a reseñas');
     };
 
     return (
-        <>
-            <div className="bg-red-600 text-dark text-center p-4">
-                <h3 className='letras p-1'>Te damos la bienvenida a nuestra página web, esperamos que puedas conseguir lo que necesitas</h3>
-                <h3 className="letras">Productos destacados.</h3>
-            </div>
-
+        <div>
+            <NavBar onSearch={handleSearch} />
             <div className="container my-4 text-center">
                 <div className="mx-auto" style={{ maxWidth: '900px' }}>
                     <Carrusel />
                 </div>
 
                 <div className="productos-destacados">
-                    {productos.length > 0 ? (
-                        productos.map((producto) => (
+                    {filteredProductos.length > 0 ? (
+                        filteredProductos.map((producto) => (
                             <div key={producto.producto_id} className="producto-item">
                                 <h3>{producto.producto_nombre}</h3>
-                                <img src={producto.imagen} alt={producto.producto_nombre} className="img-fluid" />
+                                <img src={producto.imagen} alt={producto.producto_nombre} />
                                 <p>{producto.producto_descripcion}</p>
                                 <p>Precio: {producto.precio} CRC</p>
 
@@ -71,13 +75,13 @@ function Principal() {
                             </div>
                         ))
                     ) : (
-                        <p>No hay productos disponibles.</p>
+                        <p>No hay productos disponibles</p>
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
-}
+};
 
 export default Principal;
 
@@ -85,21 +89,5 @@ export default Principal;
 
 
 
-// function Principal() {
-//     return (
-//         <>
-//             <div className="bg-red-600 text-dark text-center p-4">
 
-//                 <h3 className='letras p-1'>Te damos la bienvenida a nuestra página web, esperamos que puedas conseguir lo que necesitas</h3>
-//                 <h3 className="letras">Productos destacados.</h3>
 
-//             </div>
-//             <div className="container my-4 text-center"> 
-//                 <div className="mx-auto" style={{ maxWidth: '900px' }}> 
-//                     <Carrusel />
-//                 </div>
-//             </div>
-//         </>
-//     );
-// }
-// export default Principal;

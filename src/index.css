@@ -169,7 +169,34 @@ textarea:focus {
     text-align: center;
   }
   
-  
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* principal */
+.producto-item {
+  width: 200px; /* Tamaño fijo para cada producto */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.producto-item:hover {
+  transform: scale(1.05);
+}
+
+.producto-item img {
+  max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
+  height: 150px; /* Tamaño fijo para la altura de la imagen */
+  object-fit: cover; /* Recorta la imagen si es necesario */
+}
+
+.productos-destacados {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
   
   
   
