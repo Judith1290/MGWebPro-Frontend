@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Mapa from './maps';
+import Mapa from './Maps';
 import { FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 const Contacto = () => {

@@ -71,7 +71,7 @@ const Register = () => {
             <div className="card p-4 shadow-sm" style={{ width: '100%', maxWidth: '400px', borderRadius: '15px' }}>
                 <h1 className="text-center mb-4">REGISTRO</h1>
 
-                <form onSubmit={boton}> {/* Cambié handleRegister por boton */}
+                <form onSubmit={boton}> 
                     <div className="mb-3">
                         <label htmlFor="nombre" className="form-label">Nombre</label>
                         <input

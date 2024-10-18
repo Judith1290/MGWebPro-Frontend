@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const Principal = () => {
     const { productos } = useContext(ProductContext);
     const [searchTerm, setSearchTerm] = useState('');
-    // const [usuario, setUsuario] = useState(null);
+    const [usuario, setUsuario] = useState(null);
 
     // Función para manejar el término de búsqueda
     const handleSearch = (term) => {
@@ -21,25 +21,15 @@ const Principal = () => {
         producto.producto_nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Función para verificar si el usuario está logueado
-    const isUserLoggedIn = () => {
-        const token = document.cookie
-            .split('; ')
-            .find(row => row.startsWith('session='))
-            ?.split('=')[1];
-        return !!token;
-    };
-
-    // Función para obtener los datos del usuario si está autenticado
+    // Función para obtener los datos del usuario autenticado
     const fetchUsuario = async () => {
-        if (!isUserLoggedIn()) return; // Verificar si el usuario está logueado antes de hacer la solicitud
+        // if (!isUserLoggedIn()) return;
 
         try {
             const response = await fetch('http://localhost:8000/api/users/my_details/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${document.cookie.split('; ').find(row => row.startsWith('session=')).split('=')[1]}` 
                 },
                 credentials: 'include',
             });
@@ -61,32 +51,18 @@ const Principal = () => {
 
     // Función para agregar el producto al carrito
     const handleAddToCart = async (producto) => {
-        if (!isUserLoggedIn()) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Inicia sesión',
-                text: 'Debes iniciar sesión para agregar productos al carrito.',
-            });
-            return;
-        }
-
-        const token = document.cookie
-            .split('; ')
-            .find(row => row.startsWith('session='))
-            ?.split('=')[1];
-
-        // Lógica para agregar el producto al carrito enviando datos al backend
+       
         try {
-            const response = await fetch('http://localhost:8000/api/cart/my_cart/', {
+            const response = await fetch(`http://localhost:8000/api/cart/product/${producto.producto_id}/add_to_cart/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` 
                 },
+                credentials: 'include',
+
                 body: JSON.stringify({
-                    producto_id: producto.producto_id,
                     cantidad: 1
-                })
+                }),
             });
 
             if (response.ok) {
@@ -111,7 +87,6 @@ const Principal = () => {
             });
         }
     };
-
 
     const handleGoToPayment = () => {
         console.log('Ir a pago');

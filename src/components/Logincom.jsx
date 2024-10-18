@@ -37,20 +37,20 @@ const Logincom = () => {
             // Si el login es exitoso
             if (response.ok) {
 
-              
+
                 Swal.fire({
                     icon: "success",
                     title: "Login exitoso",
                     text: "Has iniciado sesión correctamente",
                 });
 
-               
+
                  setTimeout(() => {
                     navigate('/'); 
                 }, 1000);
 
             } else {
-             
+
                 const errorData = await response.json();
                 Swal.fire({
                     icon: "error",
