@@ -37,15 +37,20 @@ const Logincom = () => {
             // Si el login es exitoso
             if (response.ok) {
 
-                // Mostrar mensaje de éxito con SweetAlert2
+              
                 Swal.fire({
                     icon: "success",
                     title: "Login exitoso",
                     text: "Has iniciado sesión correctamente",
                 });
 
+               
+                 setTimeout(() => {
+                    navigate('/'); 
+                }, 1000);
+
             } else {
-                // Si hay algún error en la respuesta (ej: credenciales incorrectas)
+             
                 const errorData = await response.json();
                 Swal.fire({
                     icon: "error",

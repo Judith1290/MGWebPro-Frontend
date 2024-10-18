@@ -45,7 +45,7 @@ function NavBar({ onSearch }) {
           </Form>
 
           <Nav className="ml-auto d-flex align-items-center">
-            <Nav.Link as={Link} to="/Cart">
+            <Nav.Link as={Link} to="/carrito">
               <FaShoppingCart size={20} />
             </Nav.Link>
             <Nav.Link as={Link} to="/Chat">
