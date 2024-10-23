@@ -1,5 +1,5 @@
 import React from 'react'
-import Carrito from '../components/carrito_de_compra'
+import Carrito from '../components/Carrito_de_compra'
 const carrito = () => {
   return (
     <div>

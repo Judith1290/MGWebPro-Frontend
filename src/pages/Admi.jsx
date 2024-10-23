@@ -1,5 +1,6 @@
 import React from 'react'
-import Administrador from '../components/administrador'
+
+import Administrador from '../components/Administrador'
 
 const Admi = () => {
   return (

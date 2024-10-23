@@ -1,11 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ProductContext } from './ProductContext';
-import NavBar from './navbar';
+import NavBar from './Navbar';
 import Carrusel from './Carrusel';
 import { FaShoppingCart, FaCreditCard, FaStar } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { addToCart } from '../service/cartService';
+import { useNavigate } from 'react-router-dom';
 
 const Principal = () => {
+    const navigate = useNavigate();
     const { productos } = useContext(ProductContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [usuario, setUsuario] = useState(null);
@@ -23,8 +26,6 @@ const Principal = () => {
 
     // Función para obtener los datos del usuario autenticado
     const fetchUsuario = async () => {
-        // if (!isUserLoggedIn()) return;
-
         try {
             const response = await fetch('http://localhost:8000/api/users/my_details/', {
                 method: 'GET',
@@ -51,39 +52,19 @@ const Principal = () => {
 
     // Función para agregar el producto al carrito
     const handleAddToCart = async (producto) => {
-       
-        try {
-            const response = await fetch(`http://localhost:8000/api/cart/product/${producto.producto_id}/add_to_cart/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-
-                body: JSON.stringify({
-                    cantidad: 1
-                }),
+        const result = await addToCart(producto);
+    
+        if (result.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto agregado',
+                text: result.message,
             });
-
-            if (response.ok) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Producto agregado',
-                    text: `Has agregado ${producto.producto_nombre} al carrito.`,
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Hubo un problema al agregar el producto al carrito.',
-                });
-            }
-        } catch (error) {
-            console.error('Error al agregar el producto al carrito:', error);
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hubo un problema con la conexión al servidor.',
+                text: result.message,
             });
         }
     };
@@ -93,7 +74,8 @@ const Principal = () => {
     };
 
     const handleGoToResena = () => {
-        console.log('Ir a reseñas');
+    
+        navigate('/Reseña'); 
     };
 
     return (

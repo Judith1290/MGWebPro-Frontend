@@ -8,6 +8,8 @@ import Admi from '../pages/Admi';
 import { ProductProvider } from '../components/ProductContext';
 import Carrito from '../pages/carrito';
 import { AuthProvider } from '../components/AuthContext';
+import Valoracion from '../pages/valoracion';
+
 
 function Rutas() {
     return (
@@ -21,6 +23,7 @@ function Rutas() {
                     <Route path='/Informacion' element={<Informacion />} />
                     <Route path='/Administrador' element={<Admi />} />
                     <Route path='/carrito' element={<Carrito />} />
+                    <Route path='/Reseña' element={<Valoracion />} />
                 </Routes>
 
             </AuthProvider>

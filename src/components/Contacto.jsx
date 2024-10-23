@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import Mapa from './Maps';
 import { FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import {enviarCorreo} from '../service/pagi_contacto'
+
+
 
 const Contacto = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    phone: '', 
     message: ''
   });
 
@@ -17,27 +20,20 @@ const Contacto = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    fetch('http://localhost:8000/api/send_email/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
+  
+    try {
+      const data = await enviarCorreo(formData); // Llamar a enviarCorreo con formData
+      if (data) {
         alert('Correo enviado exitosamente');
+        setFormData(INITIAL_FORM_DATA); // Restablecer el formulario
       } else {
         alert('Hubo un error al enviar el correo');
       }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    } catch (error) {
+      alert('Error al enviar el correo. Intenta nuevamente.');
+    }
   };
 
   return (
@@ -59,7 +55,7 @@ const Contacto = () => {
             </div>
             <div className="mb-3">
               <label className="form-label">Teléfono:</label>
-              <input type="text" className="form-control animacion" name="numero_phone" value={formData.numero_phone} onChange={handleChange} required />
+              <input type="text" className="form-control animacion" name="phone" value={formData.phone} onChange={handleChange} required />  {/* Cambié 'numero_phone' a 'phone' */}
             </div>
             <div className="mb-3">
               <label className="form-label">Mensaje:</label>
@@ -81,11 +77,3 @@ const Contacto = () => {
 
 export default Contacto;
 
-
-
-
-
-
-
-
-  

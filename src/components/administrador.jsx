@@ -13,7 +13,7 @@ function Administrador() {
     const [categoria, setCategoria] = useState('');
     const [productos, setProductos] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
-    const [editingId, setEditingId] = useState(null);
+    const [producto_id, setEditingId] = useState(null);
     const [imageUrl, setImageUrl] = useState('');
     const [modelos, setModelos] = useState([]);
     const [categorias, setCategorias] = useState([]);
@@ -89,8 +89,9 @@ function Administrador() {
 
         try {
             const response = isEditing
-                ? await fetch('http://localhost:8000/api/inventory/products/${editingId}/', {
+                ? await fetch(`http://localhost:8000/api/inventory/products/${producto_id}/`, {
                     method: 'PATCH',
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -105,8 +106,7 @@ function Administrador() {
                     body: JSON.stringify(productData),
 
                 });
-            console.log(productData);
-            console.log("Editing ID:", editingId);
+           
             if (response.ok) {
                 Swal.fire({
                     icon: 'success',
@@ -137,12 +137,14 @@ function Administrador() {
         }
     };
 
-    const handleEdit = (product) => {
-        setModelo(product.modelo);
-        setPrecio(product.precio);
-        setCategoria(product.categoria);
-        setImageUrl(product.imagen);
-        setEditingId(product.producto_id);
+    const handleEdit = (producto) => {
+        console.log("Editing product:", producto); 
+        console.log("Editing ID:", producto.producto_id); 
+        setModelo(producto.modelo || "");
+        setPrecio(producto.precio);
+        setCategoria(producto.categoria);
+        setImageUrl(producto.imagen);
+        setEditingId(producto.producto_id);
         setIsEditing(true);
     };
 
@@ -171,7 +173,8 @@ function Administrador() {
                         </IKContext>
                     </div>
                     <div className="col-md-6">
-                        <select className="form-control mb-3 inputField" value={modelo} onChange={(e) => setModelo(parseInt(e.target.value))}>
+                        <select className="form-control mb-3 inputField" value={modelo || ""} onChange={(e) => setModelo(parseInt(e.target.value))}>
+
                             <option value="">Selecciona el modelo</option>
                             {modelos.map((modelo) => (
                                 <option key={modelo.modelo_id} value={modelo.modelo_id}>
@@ -179,7 +182,7 @@ function Administrador() {
                                 </option>
                             ))}
                         </select>
-                        <select className="form-control mb-3 inputField" value={categoria} onChange={(e) => setCategoria(parseInt(e.target.value))}>
+                        <select className="form-control mb-3 inputField" value={categoria || ""} onChange={(e) => setCategoria(parseInt(e.target.value))}>
                             <option value="">Selecciona la categoría</option>
                             {categorias.map((categoria) => (
                                 <option key={categoria.categoria_id} value={categoria.categoria_id}>
@@ -218,8 +221,6 @@ function Administrador() {
     );
 
 }
-
-// revision
 
 export default Administrador;
 
