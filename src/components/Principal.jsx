@@ -73,9 +73,9 @@ const Principal = () => {
         console.log('Ir a pago');
     };
 
-    const handleGoToResena = () => {
+    const handleGoToResena = (producto_id) => {
     
-        navigate('/Reseña'); 
+        navigate(`${producto_id}/Reseña`); 
     };
 
     return (
@@ -98,7 +98,6 @@ const Principal = () => {
                                 <img src={producto.imagen} alt={producto.producto_nombre} />
                                 <p>{producto.producto_descripcion}</p>
                                 <p>Precio: {producto.precio} CRC</p>
-
                                 <div className="d-flex justify-content-center">
                                     <FaShoppingCart
                                         className="m-2"
@@ -116,8 +115,8 @@ const Principal = () => {
                                         className="m-2"
                                         size={24}
                                         style={{ cursor: 'pointer', color: 'orange' }}
-                                        onClick={handleGoToResena}
-                                    />
+                                        onClick={() => handleGoToResena(producto.producto_id)} // Pasar el ID del producto
+/>
                                 </div>
                             </div>
                         ))

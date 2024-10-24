@@ -23,7 +23,7 @@ function Rutas() {
                     <Route path='/Informacion' element={<Informacion />} />
                     <Route path='/Administrador' element={<Admi />} />
                     <Route path='/carrito' element={<Carrito />} />
-                    <Route path='/Reseña' element={<Valoracion />} />
+                    <Route path=':producto_id/Reseña' element={<Valoracion />} />
                 </Routes>
 
             </AuthProvider>
