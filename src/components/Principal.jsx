@@ -20,8 +20,8 @@ const Principal = () => {
 
     // Filtrar productos según el término de búsqueda
     const filteredProductos = productos.filter(producto =>
-        producto.producto_nombre &&
-        producto.producto_nombre.toLowerCase().includes(searchTerm.toLowerCase())
+        producto.nombre &&
+        producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Función para obtener los datos del usuario autenticado
@@ -94,9 +94,9 @@ const Principal = () => {
                     {filteredProductos.length > 0 ? (
                         filteredProductos.map((producto) => (
                             <div key={producto.producto_id} className="producto-item">
-                                <h3>{producto.producto_nombre}</h3>
-                                <img src={producto.imagen} alt={producto.producto_nombre} />
-                                <p>{producto.producto_descripcion}</p>
+                                <h3>{producto.nombre}</h3>
+                                <img src={producto.imagen} alt={producto.nombre} />
+                                <p>{producto.descripcion}</p>
                                 <p>Precio: {producto.precio} CRC</p>
                                 <div className="d-flex justify-content-center">
                                     <FaShoppingCart

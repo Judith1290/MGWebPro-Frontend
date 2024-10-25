@@ -41,12 +41,11 @@ const Carrito = () => {
             inputPlaceholder: 'Introduce la nueva cantidad',
             showCancelButton: true,
             confirmButtonText: 'Guardar',
-            inputValue: '1',
         });
 
         if (nuevaCantidad) {
             // Llamar a la API para editar la cantidad del producto en el carrito
-            const result = await editarProductoCarrito(producto, nuevaCantidad);
+            const result = await editarProductoCarrito(producto, parseInt(nuevaCantidad));
 
             if (result.success) {
                 Swal.fire({
@@ -95,7 +94,7 @@ const Carrito = () => {
     // Efecto para actualizar el carrito después de eliminar un producto
     useEffect(() => {
         fetchCarrito();
-    }, [carritoProductos]);
+    }, []);
 
     // Función para ir a la página de pago
     const handleIrPago = () => {
@@ -109,7 +108,7 @@ const Carrito = () => {
     if (loading) {
         return <p>Cargando carrito...</p>;
     }
-    
+
 
     return (
         <div className="container my-4">
@@ -121,13 +120,13 @@ const Carrito = () => {
                             <div className="card h-100" style={{ maxWidth: '200px' }}>
                                 <img
                                     src={e.producto.imagen}
-                                    alt={e.producto.producto_nombre}
+                                    alt={e.producto.nombre}
                                     className="card-img-top"
                                     style={{ height: '120px', objectFit: 'contain' }}
                                 />
                                 <div className="card-body p-2">
                                     <h5 className="card-title" style={{ fontSize: '1rem' }}>
-                                        {e.producto.producto_nombre}
+                                        {e.producto.nombre}
                                     </h5>
                                     <p className="card-text" style={{ fontSize: '0.9rem' }}>Cantidad: {e.cantidad}</p>
                                     <p className="card-text" style={{ fontSize: '0.9rem' }}>Precio: {e.producto.precio} CRC</p>
@@ -138,7 +137,7 @@ const Carrito = () => {
                                         className="m-1"
                                         size={20}
                                         style={{ cursor: 'pointer', color: 'blue' }}
-                                        onClick={() => handleEditarCantidad(e.carrito_id, e.cantidad)}
+                                        onClick={() => handleEditarCantidad(e.carrito_id)}
                                     />
                                     <FaTrash
                                         className="m-1"

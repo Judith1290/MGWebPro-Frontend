@@ -16,12 +16,12 @@ export const addToCart = async (producto) => {
         if (response.ok) {
             return {
                 success: true,
-                message: `Has agregado ${producto.producto_nombre} al carrito.`,
+                message: `Has agregado ${producto.nombre} al carrito.`,
             };
         } else {
             return {
                 success: false,
-                message: 'Hubo un problema al agregar el producto al carrito.',
+                message: 'tienes que loguarte para agregar un producto al carrito.',
             };
         }
     } catch (error) {
@@ -36,6 +36,8 @@ export const addToCart = async (producto) => {
 
 
 export const editarProductoCarrito = async (producto, nuevaCantidad) => {
+    console.log(nuevaCantidad);
+    
     try {
         // Realiza la solicitud PATCH al backend para actualizar la cantidad del producto en el carrito
         const response = await fetch(`http://localhost:8000/api/cart/my_cart/${producto}/`, {
@@ -61,8 +63,6 @@ export const editarProductoCarrito = async (producto, nuevaCantidad) => {
         return { success: false, error: 'Error de conexión con el servidor' };
     }
 };
-
-
 
 
 

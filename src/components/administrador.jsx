@@ -77,9 +77,8 @@ function Administrador() {
 
     const handleSubmit = async () => {
         const productData = {
-            imagen: imageUrl,
-            producto_nombre: nombre,
-            producto_descripcion: desc,
+            nombre: nombre,
+            descripcion: desc,
             stock: stock,
             modelo: modelo,
             precio: precio,
@@ -97,7 +96,7 @@ function Administrador() {
                     },
                     body: JSON.stringify(productData),
                 })
-                    : await fetch('http://localhost:8000/api/inventory/products/', {
+                : await fetch('http://localhost:8000/api/inventory/products/', {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
@@ -106,7 +105,7 @@ function Administrador() {
                     body: JSON.stringify(productData),
 
                 });
-           
+
             if (response.ok) {
                 Swal.fire({
                     icon: 'success',
@@ -118,7 +117,7 @@ function Administrador() {
                 setCategoria('');
                 setImageUrl('');
                 setIsEditing(false);
-                fetchProductos(); 
+                fetchProductos();
             } else {
                 const errorData = await response.json();
                 Swal.fire({
@@ -138,8 +137,8 @@ function Administrador() {
     };
 
     const handleEdit = (producto) => {
-        console.log("Editing product:", producto); 
-        console.log("Editing ID:", producto.producto_id); 
+        console.log("Editing product:", producto);
+        console.log("Editing ID:", producto.producto_id);
         setModelo(producto.modelo || "");
         setPrecio(producto.precio);
         setCategoria(producto.categoria);
@@ -204,9 +203,9 @@ function Administrador() {
                 {productos.length > 0 ? (
                     productos.map((producto) => (
                         <div key={producto.producto_id} className="productItem administrador-product">
-                            <h3>{producto.producto_nombre}</h3>
-                            <img src={producto.imagen} alt={producto.producto_nombre} className="productImage img-fluid" />
-                            <p>Descripción: {producto.producto_descripcion}</p>
+                            <h3>{producto.nombre}</h3>
+                            <img src={producto.imagen} alt={producto.imagen} className="productImage img-fluid" />
+                            <p>Descripción: {producto.descripcion}</p>
                             <p>Modelo: {producto.modelo}</p>
                             <p>Precio: {producto.precio} CRC</p>
                             <p>Stock: {producto.stock}</p>
