@@ -3,11 +3,11 @@ import Contacto from '../components/Contacto'
 
 
 const Informacion = () => {
-    return (
-      <div>
-        <Contacto/>
-      </div>
-    )
-  }
-  
-  export default Informacion
+  return (
+    <div>
+      <Contacto />
+    </div>
+  )
+}
+
+export default Informacion

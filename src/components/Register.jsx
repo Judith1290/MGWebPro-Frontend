@@ -11,7 +11,9 @@ const Register = () => {
     const [correo, setCorreo] = useState('');
     const navigate = useNavigate();
 
-    const boton = async () => {
+    const boton = async (e) => {
+        e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+
         // Validación de campos
         if (!Nombre.trim() || !Apellido.trim() || !contraseña.trim() || !correo.trim()) {
             Swal.fire("Por favor, complete todos los campos!");
@@ -36,7 +38,7 @@ const Register = () => {
                 password: contraseña,
             };
 
-            const response = await postData('http://localhost:8000/api/user/register/', payload);
+            const response = await postData('http://localhost:8000/api/users/register/', payload);
 
             if (response) {
                 Swal.fire({
@@ -65,65 +67,66 @@ const Register = () => {
     };
 
     return (
-        <div className='container mt-5 d-flex justify-content-center ' style={{ border: "none" }}>
-            <div className="card shadow border-0">
-                <div className="card-body">
-                    <h1 className="card-title text-center">REGISTRO</h1>
+        <div className='d-flex justify-content-center align-items-center vh-100'>
+            <div className="card p-4 shadow-sm" style={{ width: '100%', maxWidth: '400px', borderRadius: '15px' }}>
+                <h1 className="text-center mb-4">REGISTRO</h1>
 
-                    <div className="mb-4">
+                <form onSubmit={boton}> 
+                    <div className="mb-3">
                         <label htmlFor="nombre" className="form-label">Nombre</label>
                         <input
                             type="text"
-                            className="form-control custom-input"
+                            className="form-control input-neon"
                             id="nombre"
-                            placeholder='Nombre de usuario'
+                            placeholder="Nombre de usuario"
                             value={Nombre}
                             onChange={(e) => setNombre(e.target.value)}
                         />
                     </div>
 
-                    <div className="mb-4">
+                    <div className="mb-3">
                         <label htmlFor="apellido" className="form-label">Apellido</label>
                         <input
                             type="text"
-                            className="form-control custom-input"
+                            className="form-control input-neon"
                             id="apellido"
-                            placeholder='Apellido de usuario'
+                            placeholder="Apellido de usuario"
                             value={Apellido}
                             onChange={(e) => setApellido(e.target.value)}
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="contraseña" className="form-label">Contraseña</label>
+                    <div className="mb-3">
+                        <label htmlFor="contrasena" className="form-label">Contraseña</label>
                         <input
-                            type='password'
-                            className="form-control custom-input"
-                            id='contraseña'
-                            placeholder='Password'
+                            type="password"
+                            className="form-control input-neon"
+                            id="contrasena"
+                            placeholder="Ingrese su contraseña"
                             value={contraseña}
                             onChange={(e) => setContraseña(e.target.value)}
                         />
                     </div>
 
-                    <div className="mb-4">
+                    <div className="mb-3">
                         <label htmlFor="correo" className="form-label">Correo Electrónico</label>
                         <input
-                            type='email'
-                            className="form-control custom-input"
-                            id='correo'
-                            placeholder='Gmail'
+                            type="email"
+                            className="form-control input-neon"
+                            id="correo"
+                            placeholder="Correo electrónico"
                             value={correo}
                             onChange={(e) => setCorreo(e.target.value)}
                         />
                     </div>
 
-                    <button onClick={boton} className="btn btn-primary w-100 custom-button">REGISTRAR</button>
-                </div>
+                    <button type="submit" className="btn btn-primary w-100">REGISTRAR</button>
+                </form>
             </div>
         </div>
     );
 };
 
 export default Register;
+
 
