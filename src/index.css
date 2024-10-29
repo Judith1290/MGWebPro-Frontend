@@ -197,8 +197,55 @@ textarea:focus {
   justify-content: center;
 }
 
-  
-  
-  
-  
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* reseñas */
 
+.neon-card {
+  background-color: #1a1a1a; /* Color de fondo oscuro */
+  border: 1px solid #00ffcc; /* Borde neón */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5); /* Sombra de neón */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+  max-width: 300px; /* Tamaño máximo de la caja */
+}
+
+.neon-card:hover {
+  transform: scale(1.05); /* Aumentar tamaño al pasar el mouse */
+  box-shadow: 0 0 30px rgba(0, 255, 204, 1); /* Aumentar sombra al pasar el mouse */
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   */
+
+.botton {
+  background: linear-gradient(45deg, #d4a5ff, #a18cd1);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botton:hover {
+  background-color: #7d3f98; /* Cambia de color al pasar el cursor */
+  transform: scale(1.05); /* Efecto de agrandar ligeramente */
+}
+
+.botton:active {
+  background-color: #5c2d73; /* Cambia de color al hacer clic */
+  transform: scale(1); /* El botón vuelve a su tamaño normal */
+}
+
+/* Estilos para el botón de búsqueda */
+.search-button {
+  background: linear-gradient(45deg, #d4a5ff, #a18cd1); /* Degradado lila */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px; /* Bordes redondeados */
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}

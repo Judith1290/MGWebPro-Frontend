@@ -5,6 +5,7 @@ import Carrusel from './Carrusel';
 import { FaShoppingCart, FaCreditCard, FaStar } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { addToCart } from '../service/cartService';
+import { fetchUsuario } from '../service/principal';
 import { useNavigate } from 'react-router-dom';
 
 const Principal = () => {
@@ -13,47 +14,28 @@ const Principal = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [usuario, setUsuario] = useState(null);
 
-    // Función para manejar el término de búsqueda
     const handleSearch = (term) => {
         setSearchTerm(term);
     };
 
-    // Filtrar productos según el término de búsqueda
     const filteredProductos = productos.filter(producto =>
+        producto.is_active &&
         producto.nombre &&
         producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Función para obtener los datos del usuario autenticado
-    const fetchUsuario = async () => {
-        try {
-            const response = await fetch('http://localhost:8000/api/users/my_details/', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setUsuario(data);
-            } else {
-                console.error('Error al obtener el usuario:', response.status);
-            }
-        } catch (error) {
-            console.error('Error al obtener el usuario:', error);
-        }
-    };
-
     useEffect(() => {
-        fetchUsuario();
+        const obtenerUsuario = async () => {
+            const data = await fetchUsuario();
+            setUsuario(data);
+        };
+
+        obtenerUsuario();
     }, []);
 
-    // Función para agregar el producto al carrito
     const handleAddToCart = async (producto) => {
         const result = await addToCart(producto);
-    
+
         if (result.success) {
             Swal.fire({
                 icon: 'success',
@@ -74,8 +56,7 @@ const Principal = () => {
     };
 
     const handleGoToResena = (producto_id) => {
-    
-        navigate(`${producto_id}/Reseña`); 
+        navigate(`${producto_id}/Reseña`);
     };
 
     return (
@@ -115,8 +96,8 @@ const Principal = () => {
                                         className="m-2"
                                         size={24}
                                         style={{ cursor: 'pointer', color: 'orange' }}
-                                        onClick={() => handleGoToResena(producto.producto_id)} // Pasar el ID del producto
-/>
+                                        onClick={() => handleGoToResena(producto.producto_id)}
+                                    />
                                 </div>
                             </div>
                         ))
@@ -130,7 +111,6 @@ const Principal = () => {
 };
 
 export default Principal;
-
 
 
 

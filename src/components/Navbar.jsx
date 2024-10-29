@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -14,12 +12,14 @@ function NavBar({ onSearch }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    onSearch(searchTerm);  
+    onSearch(searchTerm);
   };
 
   return (
     <Navbar expand="lg" className='header'>
       <Container fluid>
+
+
         <div className='tituloMG'><Navbar.Brand href="#">MG TECHNOLOGY</Navbar.Brand></div>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -31,18 +31,19 @@ function NavBar({ onSearch }) {
             </NavDropdown>
           </Nav>
 
-          {/* Barra de búsqueda */}
+
           <Form className="d-flex mx-auto" onSubmit={handleSearch}>
             <Form.Control
               type="search"
               placeholder="Buscar productos"
-              className="me-2"
+              className="me-2 search-bar"  // Clase "search-bar"
               aria-label="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className='botton' variant="outline-success">Buscar</button>
+            <button className="search-button" type="submit">Buscar</button>  
           </Form>
+
 
           <Nav className="ml-auto d-flex align-items-center">
             <Nav.Link as={Link} to="/carrito">
