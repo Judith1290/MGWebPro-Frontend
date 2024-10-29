@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { ProductContext } from './ProductContext';
+import { ProductContext } from '../context/ProductContext';
 import NavBar from './Navbar';
 import Carrusel from './Carrusel';
 import { FaShoppingCart, FaCreditCard, FaStar } from 'react-icons/fa';
