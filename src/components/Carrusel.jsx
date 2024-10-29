@@ -5,13 +5,12 @@ import React from 'react';
 const Carrusel = () => {
 
     const images = [
-        { src: "/img/imagen.png", alt: "prueba" },
-        { src: "/img/imagen1.png", alt: "soli" },
-        { src: "img/imagen2.png", alt: "lala" },
-        { src: "img/imagen3.png", alt: "lala" },
-        
-
+        { src: "/img/imagen.png", alt: "SET DIJES" },
+        { src: "/img/imagen1.png", alt: "SET DIJES" },
+        { src: "img/imagen2.png", alt: "SET DIJES" },
+        { src: "img/imagen3.png", alt: "SET DIJES" },
     ]
+
     return (
         <div>
 
@@ -25,7 +24,7 @@ const Carrusel = () => {
                             style={{ maxHeight: '500px', objectFit: 'cover' }}
                         />
                         <Carousel.Caption>
-                        <h1>{imagen.alt}</h1>
+                            <h1>{imagen.alt}</h1>
                         </Carousel.Caption>
                     </Carousel.Item>
                 ))}
