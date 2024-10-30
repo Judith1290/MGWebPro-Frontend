@@ -3,8 +3,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-// import Mapa from './maps';
-
 
 const Footer = () => {
 
@@ -20,9 +18,7 @@ const Footer = () => {
                 <Card.Body>
                     <div className="row">
 
-                        {/* <div className="col-md-6  mt-2">
-                            <Mapa/>
-                        </div> */}
+                       
 
 
                         <div className="col-md-6 mt-7 p-9">

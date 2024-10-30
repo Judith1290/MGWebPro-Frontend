@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { postData } from '../service/api';
+import { registerUser } from '../service/registe';
 
 const Register = () => {
     const [Nombre, setNombre] = useState('');
@@ -12,9 +12,8 @@ const Register = () => {
     const navigate = useNavigate();
 
     const boton = async (e) => {
-        e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+        e.preventDefault();
 
-        // Validación de campos
         if (!Nombre.trim() || !Apellido.trim() || !contraseña.trim() || !correo.trim()) {
             Swal.fire("Por favor, complete todos los campos!");
             return;
@@ -29,39 +28,29 @@ const Register = () => {
             return;
         }
 
-        // Lógica de registro
-        try {
-            const payload = {
-                first_name: Nombre,
-                last_name: Apellido,
-                email: correo,
-                password: contraseña,
-            };
+        const payload = {
+            first_name: Nombre,
+            last_name: Apellido,
+            email: correo,
+            password: contraseña,
+        };
 
-            const response = await postData('http://localhost:8000/api/users/register/', payload);
+        const response = await registerUser(payload); 
 
-            if (response) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Registro exitoso",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate('/Login');
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Usuario ya existente!",
-                });
-            }
-        } catch (error) {
-            console.error('Error al enviar datos:', error);
+        if (response) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registro exitoso",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            navigate('/Login');
+        } else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Registro fallido!",
+                text: "Usuario ya existente!",
             });
         }
     };
