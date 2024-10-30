@@ -76,7 +76,18 @@ const Principal = () => {
                         filteredProductos.map((producto) => (
                             <div key={producto.producto_id} className="producto-item">
                                 <h3>{producto.nombre}</h3>
-                                <img src={producto.imagen} alt={producto.nombre} />
+                                <img
+                                src={producto.imagen}
+                                alt={producto.nombre}
+                                className="img-fluid"
+                                style={{
+                                    width: '150px',
+                                    height: '150px',
+                                    objectFit: 'cover',
+                                    borderRadius: '8px'
+                                }}
+                            />
+                                
                                 <p>{producto.descripcion}</p>
                                 <p>Precio: {producto.precio} CRC</p>
                                 <div className="d-flex justify-content-center">

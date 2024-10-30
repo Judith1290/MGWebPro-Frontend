@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaComments } from 'react-icons/fa';
+import { FaShoppingCart, FaHistory } from 'react-icons/fa';
 
 function NavBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,7 +36,7 @@ function NavBar({ onSearch }) {
             <Form.Control
               type="search"
               placeholder="Buscar productos"
-              className="me-2 search-bar"  // Clase "search-bar"
+              className="me-2 search-bar"  
               aria-label="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -49,8 +49,8 @@ function NavBar({ onSearch }) {
             <Nav.Link as={Link} to="/carrito">
               <FaShoppingCart size={20} />
             </Nav.Link>
-            <Nav.Link as={Link} to="/Chat">
-              <FaComments size={20} />
+            <Nav.Link as={Link} to="/historial"> 
+              <FaHistory size={20} /> 
             </Nav.Link>
             <button className='botton' variant="outline-success">
               <Link to='/Login'>REGISTRO</Link>

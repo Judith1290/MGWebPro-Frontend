@@ -9,6 +9,8 @@ import { ProductProvider } from '../components/ProductContext';
 import Carrito from '../pages/carrito';
 import { AuthProvider } from '../components/AuthContext';
 import Valoracion from '../pages/valoracion';
+import Histo from '../pages/histo';
+// import Pagos from '../pages/pagos';
 
 
 function Rutas() {
@@ -24,6 +26,8 @@ function Rutas() {
                     <Route path='/Administrador' element={<Admi />} />
                     <Route path='/carrito' element={<Carrito />} />
                     <Route path=':producto_id/Reseña' element={<Valoracion />} />
+                    <Route path=':historisl' element={<Histo />} />
+                    {/* <Route path=':pagos' element={<Pagos />} /> */}
                 </Routes>
 
             </AuthProvider>

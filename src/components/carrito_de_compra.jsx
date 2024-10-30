@@ -3,6 +3,7 @@ import { FaTrash, FaEdit, FaCreditCard } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { editarProductoCarrito, eliminarProductoCarrito } from '../service/cartService'
+import { pagopos } from '../service/pagos'
 
 const Carrito = () => {
     const [carritoProductos, setCarritoProductos] = useState([]);
@@ -97,8 +98,16 @@ const Carrito = () => {
     }, []);
 
     // Función para ir a la página de pago
-    const handleIrPago = () => {
-        navigate('/pago');
+   
+    const handleIrPago = async () => {
+        try {
+            const result = await pagopos();
+            console.log('Pago exitoso:', result);
+            
+        } catch (error) {
+            console.error('Error en el proceso de pago:', error);
+            
+        }
     };
 
     useEffect(() => {

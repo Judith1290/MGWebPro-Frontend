@@ -222,7 +222,18 @@ function Administrador() {
                     productos.map((producto) => (
                         <div key={producto.producto_id} className="productItem administrador-product">
                             <h3>{producto.nombre}</h3>
-                            <img src={producto.imagen} alt={producto.imagen} className="productImage img-fluid" />
+                        
+                            <img
+                                src={producto.imagen}
+                                alt={producto.nombre}
+                                className="img-fluid"
+                                style={{
+                                    width: '200px',
+                                    height: '200px',
+                                    objectFit: 'cover',
+                                    borderRadius: '8px'
+                                }}
+                            />
                             <p>Descripción: {producto.descripcion}</p>
                             <p>Modelo: {producto.modelo}</p>
                             <p>Precio: {producto.precio} CRC</p>
