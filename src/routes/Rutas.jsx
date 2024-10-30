@@ -6,6 +6,7 @@ import PaginaInicio from '../pages/Inicio';
 import Admi from '../pages/Admi';
 import Carrito from '../pages/carrito';
 import Valoracion from '../pages/valoracion';
+import Histo from '../pages/histo';
 import PrivateRoutes from './PrivateRoutes';
 
 function Rutas() {
@@ -25,6 +26,7 @@ function Rutas() {
       />
       <Route path='/carrito' element={<Carrito />} />
       <Route path=':producto_id/Reseña' element={<Valoracion />} />
+      <Route path=':historial' element={<Histo />} />
     </Routes>
   );
 }

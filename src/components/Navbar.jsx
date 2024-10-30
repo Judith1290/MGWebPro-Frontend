@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -7,19 +5,21 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaComments } from 'react-icons/fa';
+import { FaShoppingCart, FaHistory } from 'react-icons/fa';
 
 function NavBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
     e.preventDefault();
-    onSearch(searchTerm);  
+    onSearch(searchTerm);
   };
 
   return (
     <Navbar expand="lg" className='header'>
       <Container fluid>
+
+
         <div className='tituloMG'><Navbar.Brand href="#">MG TECHNOLOGY</Navbar.Brand></div>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -31,25 +31,26 @@ function NavBar({ onSearch }) {
             </NavDropdown>
           </Nav>
 
-          {/* Barra de búsqueda */}
+
           <Form className="d-flex mx-auto" onSubmit={handleSearch}>
             <Form.Control
               type="search"
               placeholder="Buscar productos"
-              className="me-2"
+              className="me-2 search-bar"  
               aria-label="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className='botton' variant="outline-success">Buscar</button>
+            <button className="search-button" type="submit">Buscar</button>  
           </Form>
+
 
           <Nav className="ml-auto d-flex align-items-center">
             <Nav.Link as={Link} to="/carrito">
               <FaShoppingCart size={20} />
             </Nav.Link>
-            <Nav.Link as={Link} to="/Chat">
-              <FaComments size={20} />
+            <Nav.Link as={Link} to="/historial"> 
+              <FaHistory size={20} /> 
             </Nav.Link>
             <button className='botton' variant="outline-success">
               <Link to='/Login'>REGISTRO</Link>

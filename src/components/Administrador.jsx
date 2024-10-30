@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { IKContext, IKUpload } from 'imagekitio-react';
-
+import { toggleProductActive } from '../service/producto';
 
 function Administrador() {
     const [stock, setStock] = useState('');
@@ -17,6 +16,7 @@ function Administrador() {
     const [imageUrl, setImageUrl] = useState('');
     const [modelos, setModelos] = useState([]);
     const [categorias, setCategorias] = useState([]);
+    const STOCK_UMBRAL = 5;
 
     const handleImageUploadSuccess = (response) => {
         setImageUrl(response.url);
@@ -59,6 +59,21 @@ function Administrador() {
             console.error('Error fetching models and categories:', error);
         }
     };
+
+    const handleToggleActive = async (producto) => {
+        console.log(producto);
+        try {
+            await toggleProductActive(producto.producto_id);
+            await fetchProductos();
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Ocurrió un error al cambiar el estado del producto.',
+            });
+        }
+    };
+
 
     const authenticator = async () => {
         try {
@@ -170,6 +185,9 @@ function Administrador() {
                                 className="form-control inputField"
                             />
                         </IKContext>
+                        {imageUrl && (
+                            <img src={imageUrl} alt="Imagen del producto" className="mt-3" style={{ width: '80%', height: 'auto' }} />
+                        )}
                     </div>
                     <div className="col-md-6">
                         <select className="form-control mb-3 inputField" value={modelo || ""} onChange={(e) => setModelo(parseInt(e.target.value))}>
@@ -204,12 +222,35 @@ function Administrador() {
                     productos.map((producto) => (
                         <div key={producto.producto_id} className="productItem administrador-product">
                             <h3>{producto.nombre}</h3>
-                            <img src={producto.imagen} alt={producto.imagen} className="productImage img-fluid" />
+                        
+                            <img
+                                src={producto.imagen}
+                                alt={producto.nombre}
+                                className="img-fluid"
+                                style={{
+                                    width: '200px',
+                                    height: '200px',
+                                    objectFit: 'cover',
+                                    borderRadius: '8px'
+                                }}
+                            />
                             <p>Descripción: {producto.descripcion}</p>
                             <p>Modelo: {producto.modelo}</p>
                             <p>Precio: {producto.precio} CRC</p>
                             <p>Stock: {producto.stock}</p>
+
+                            {producto.stock <= STOCK_UMBRAL && (
+                                <div className="alert alert-warning" role="alert">
+                                    ¡Stock bajo! Quedan pocas unidades.
+                                </div>
+                            )}
+
                             <button className="btn btn-light neon-effect" onClick={() => handleEdit(producto)}>Editar</button>
+
+                            <button className="btn btn-warning neon-effect" onClick={() => handleToggleActive(producto)}>
+                                {producto.is_active ? 'Desactivar' : 'Activar'}
+                            </button>
+
                         </div>
                     ))
                 ) : (
@@ -222,5 +263,4 @@ function Administrador() {
 }
 
 export default Administrador;
-
 
