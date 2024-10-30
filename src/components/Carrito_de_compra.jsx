@@ -98,17 +98,18 @@ const Carrito = () => {
     }, []);
 
     // Función para ir a la página de pago
-   
+
     const handleIrPago = async () => {
         try {
             const result = await pagopos();
-            console.log('Pago exitoso:', result);
-            
+            window.location.replace(result)
+
         } catch (error) {
             console.error('Error en el proceso de pago:', error);
-            
+
         }
     };
+
 
     useEffect(() => {
         fetchCarrito();
@@ -158,7 +159,7 @@ const Carrito = () => {
                                         className="m-1"
                                         size={20}
                                         style={{ cursor: 'pointer', color: 'green' }}
-                                        onClick={handleIrPago}
+                                        onClick={() => handleIrPago()}
                                     />
                                 </div>
                             </div>

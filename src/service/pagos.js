@@ -1,11 +1,16 @@
-export const pagopos = async () => {
+export const pagopos = async (payload) => {
     try {
         const response = await fetch(`http://localhost:8000/api/payments/create_checkout_session/`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             credentials: 'include',
+            body: JSON.stringify(payload)
         });
         const data = await response.json()
-        window.location.replace(data)
+        return data
+
 
 
         if (!response.ok) {
@@ -24,8 +29,8 @@ export const historial = async () => {
             credentials: 'include',
         });
         const data = await response.json()
-   
-    if (!response.ok) {
+
+        if (!response.ok) {
             throw new Error('Error de historia');
         }
 
@@ -35,6 +40,7 @@ export const historial = async () => {
         throw error;
     }
 };
+
 
 
 

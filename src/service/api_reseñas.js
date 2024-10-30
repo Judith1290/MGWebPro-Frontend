@@ -2,7 +2,7 @@
 export const checkLoginStatus = async () => {
   const response = await fetch('http://localhost:8000/api/users/my_details/', {
     method: 'GET',
-    credentials: 'include',  // Incluye las cookies para autenticación
+    credentials: 'include',
   });
 
   if (response.ok) {

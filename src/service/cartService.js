@@ -37,9 +37,9 @@ export const addToCart = async (producto) => {
 
 export const editarProductoCarrito = async (producto, nuevaCantidad) => {
     console.log(nuevaCantidad);
-    
+
     try {
-        // Realiza la solicitud PATCH al backend para actualizar la cantidad del producto en el carrito
+
         const response = await fetch(`http://localhost:8000/api/cart/my_cart/${producto}/`, {
             method: 'PATCH',
             headers: {
