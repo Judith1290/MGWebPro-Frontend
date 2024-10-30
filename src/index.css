@@ -2,177 +2,179 @@
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 input,
 textarea {
-    border: 2px solid transparent;
-    padding: 10px;
-    border-radius: 8px;
-    transition: border-color 0.3s;
-   
+  border: 2px solid transparent;
+  padding: 10px;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+
 }
 
 input:focus,
 textarea:focus {
-    outline: none;
-    border-color: #00ffcc;
-    box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc;
+  outline: none;
+  border-color: #00ffcc;
+  box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc;
 }
 
 
 .animacion {
-    animation: neon-glow 2s infinite;
-   
+  animation: neon-glow 2s infinite;
+
 }
 
 @keyframes neon-glow {
-    0% {
-        border-color: #00ffcc;
-       
-    }
+  0% {
+    border-color: #00ffcc;
 
-    50% {
-        border-color: #ffff00;
-        
-    }
+  }
 
-    100% {
-        border-color: #00ffcc;
-        /* Color final */
-    }
+  50% {
+    border-color: #ffff00;
+
+  }
+
+  100% {
+    border-color: #00ffcc;
+    /* Color final */
+  }
 }
 
 /* pagina de registro */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .input-neon:focus {
-    outline: none !important;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.4) !important;
-    border-color: rgba(0, 255, 255, 0.7) !important;
-    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
+  outline: none !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.4) !important;
+  border-color: rgba(0, 255, 255, 0.7) !important;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
 }
 
 .input-neon {
-    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 /* Fondo principal */
 .administrador-container {
-    background-color: #f0f8ff; 
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
- 
-  .administrador-form {
-    background-color: rgba(255, 255, 255, 0.5); 
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
- 
-  .administrador-form .form-control {
-    background-color: transparent; 
-    border: 2px solid #40e0d0; 
-    color: #000; 
-    border-radius: 15px;
-    padding: 10px;
-    margin-bottom: 15px;
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-  }
-  
+  background-color: #f0f8ff;
+  padding: 20px;
+  border-radius: 10px;
+}
 
-  .administrador-form .form-control:focus {
-    background-color: transparent; 
-    box-shadow: 0px 0px 15px #40e0d0; 
-    outline: none;
-  }
-  
- 
-  .administrador-form button {
-    background-color: #800080; 
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-  }
-  
- 
-  .administrador-form button:hover {
-    background-color: #9932cc; 
-  }
 
-  /* Producto individual en la lista de nuevos productos */
+.administrador-form {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.administrador-form .form-control {
+  background-color: transparent;
+  border: 2px solid #40e0d0;
+  color: #000;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+
+.administrador-form .form-control:focus {
+  background-color: transparent;
+  box-shadow: 0px 0px 15px #40e0d0;
+  outline: none;
+}
+
+
+.administrador-form button {
+  background-color: #800080;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+
+.administrador-form button:hover {
+  background-color: #9932cc;
+}
+
+/* Producto individual en la lista de nuevos productos */
 
 .productSection {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  
-  .productSection h2 {
-    color: #000; 
-    margin-bottom: 20px; 
-  }
-  
- 
-  .productList {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-around; 
-    gap: 20px; 
-    margin-bottom: 20px;
-  }
-  
-  /* Producto individual en la lista de nuevos productos */
-  .productItem {
-    background-color: #ffffff; 
-    padding: 10px; 
-    border-radius: 8px; 
-    margin-bottom: 10px; 
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    color: #000; 
-    text-align: center;
-    width: 200px; 
-  }
-  
-  /* Estilo de la tarjeta de producto */
-  .administrador-product {
-    background-color: rgba(255, 255, 255, 0.8); 
-    padding: 15px; 
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-    margin-bottom: 15px; 
-    color: #000; 
-    width: 220px; 
-  }
-  
-  /* Estilo de la imagen del producto */
-  .administrador-product img {
-    max-width: 100%;
-    border-radius: 8px; /* Ajustar el radio del borde de la imagen */
-  }
-  
- 
-  .administrador-product h3 {
-    color: #000; 
-    text-transform: uppercase;
-    font-size: 16px; 
-  }
-  
- 
-  .administrador-product p {
-    color: #000;
-    font-size: 12px; 
-    text-align: center;
-  }
-  
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.productSection h2 {
+  color: #000;
+  margin-bottom: 20px;
+}
+
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Producto individual en la lista de nuevos productos */
+.productItem {
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  color: #000;
+  text-align: center;
+  width: 200px;
+}
+
+/* Estilo de la tarjeta de producto */
+.administrador-product {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  color: #000;
+  width: 220px;
+}
+
+/* Estilo de la imagen del producto */
+.administrador-product img {
+  max-width: 100%;
+  border-radius: 8px;
+  /* Ajustar el radio del borde de la imagen */
+}
+
+
+.administrador-product h3 {
+  color: #000;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+
+.administrador-product p {
+  color: #000;
+  font-size: 12px;
+  text-align: center;
+}
+
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* principal */
 .producto-item {
-  width: 200px; /* Tamaño fijo para cada producto */
+  width: 200px;
+  /* Tamaño fijo para cada producto */
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 10px;
@@ -186,9 +188,12 @@ textarea:focus {
 }
 
 .producto-item img {
-  max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
-  height: 150px; /* Tamaño fijo para la altura de la imagen */
-  object-fit: cover; /* Recorta la imagen si es necesario */
+  max-width: 100%;
+  /* Asegura que la imagen no sobrepase el ancho del contenedor */
+  height: 150px;
+  /* Tamaño fijo para la altura de la imagen */
+  object-fit: cover;
+  /* Recorta la imagen si es necesario */
 }
 
 .productos-destacados {
@@ -201,17 +206,25 @@ textarea:focus {
 /* reseñas */
 
 .neon-card {
-  background-color: #1a1a1a; /* Color de fondo oscuro */
-  border: 1px solid #00ffcc; /* Borde neón */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5); /* Sombra de neón */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
-  max-width: 300px; /* Tamaño máximo de la caja */
+  background-color: #1a1a1a;
+  /* Color de fondo oscuro */
+  border: 1px solid #00ffcc;
+  /* Borde neón */
+  border-radius: 8px;
+  /* Bordes redondeados */
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+  /* Sombra de neón */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Transición suave */
+  max-width: 300px;
+  /* Tamaño máximo de la caja */
 }
 
 .neon-card:hover {
-  transform: scale(1.05); /* Aumentar tamaño al pasar el mouse */
-  box-shadow: 0 0 30px rgba(0, 255, 204, 1); /* Aumentar sombra al pasar el mouse */
+  transform: scale(1.05);
+  /* Aumentar tamaño al pasar el mouse */
+  box-shadow: 0 0 30px rgba(0, 255, 204, 1);
+  /* Aumentar sombra al pasar el mouse */
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   */
@@ -229,22 +242,28 @@ textarea:focus {
 }
 
 .botton:hover {
-  background-color: #7d3f98; /* Cambia de color al pasar el cursor */
-  transform: scale(1.05); /* Efecto de agrandar ligeramente */
+  background-color: #7d3f98;
+  /* Cambia de color al pasar el cursor */
+  transform: scale(1.05);
+  /* Efecto de agrandar ligeramente */
 }
 
 .botton:active {
-  background-color: #5c2d73; /* Cambia de color al hacer clic */
-  transform: scale(1); /* El botón vuelve a su tamaño normal */
+  background-color: #5c2d73;
+  /* Cambia de color al hacer clic */
+  transform: scale(1);
+  /* El botón vuelve a su tamaño normal */
 }
 
 /* Estilos para el botón de búsqueda */
 .search-button {
-  background: linear-gradient(45deg, #d4a5ff, #a18cd1); /* Degradado lila */
+  background: linear-gradient(45deg, #d4a5ff, #a18cd1);
+  /* Degradado lila */
   border: none;
   color: white;
   padding: 10px 20px;
-  border-radius: 25px; /* Bordes redondeados */
+  border-radius: 25px;
+  /* Bordes redondeados */
   margin-left: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
@@ -254,7 +273,8 @@ textarea:focus {
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .producto-item {
-  width: 220px; /* Ajusta según el ancho deseado */
+  width: 220px;
+  /* Ajusta según el ancho deseado */
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
@@ -269,13 +289,15 @@ textarea:focus {
 .producto-item h3 {
   font-size: 1.1rem;
   font-weight: bold;
-  min-height: 50px; /* Ajusta para una altura fija */
+  min-height: 50px;
+  /* Ajusta para una altura fija */
   margin-bottom: 8px;
 }
 
 .producto-item p {
   font-size: 0.9rem;
-  min-height: 40px; /* Asegura que todas las descripciones tengan la misma altura */
+  min-height: 40px;
+  /* Asegura que todas las descripciones tengan la misma altura */
   margin: 5px 0;
 }
 
@@ -291,4 +313,36 @@ textarea:focus {
   width: 100%;
   justify-content: space-around;
   margin-top: 10px;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.inputField {
+  text-transform: capitalize;
+}
+
+.productos-destacados {
+  text-transform: capitalize;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.mapaCont {
+  background-color: #f8f9fa;
+  /* Color de fondo suave */
+  padding: 20px;
+  border-radius: 10px;
+  /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Sombra */
+}
+
+.card {
+  transition: transform 0.2s;
+  /* Efecto de transición */
+}
+
+.card:hover {
+  transform: scale(1.05);
+  /* Efecto de aumento al pasar el ratón */
 }

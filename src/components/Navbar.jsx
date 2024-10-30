@@ -49,7 +49,7 @@ function NavBar({ onSearch }) {
             <Nav.Link as={Link} to="/carrito">
               <FaShoppingCart size={20} />
             </Nav.Link>
-            <Nav.Link as={Link} to="/historial"> 
+            <Nav.Link as={Link} to="/Histo"> 
               <FaHistory size={20} /> 
             </Nav.Link>
             <button className='botton' variant="outline-success">

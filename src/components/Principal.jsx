@@ -59,6 +59,7 @@ const Principal = () => {
         navigate(`${producto_id}/Reseña`);
     };
 
+ 
     return (
         <div>
             <NavBar onSearch={handleSearch} />
@@ -89,7 +90,8 @@ const Principal = () => {
                             />
                                 
                                 <p>{producto.descripcion}</p>
-                                <p>Precio: {producto.precio} CRC</p>
+                                <p>Precio: {Number(producto.precio).toLocaleString('es-ES')} CRC</p>
+                                {/* <p>Precio: {producto.precio} CRC</p> */}
                                 <div className="d-flex justify-content-center">
                                     <FaShoppingCart
                                         className="m-2"
@@ -97,12 +99,12 @@ const Principal = () => {
                                         style={{ cursor: 'pointer', color: 'blue' }}
                                         onClick={() => handleAddToCart(producto)}
                                     />
-                                    <FaCreditCard
+                                    {/* <FaCreditCard
                                         className="m-2"
                                         size={24}
                                         style={{ cursor: 'pointer', color: 'green' }}
                                         onClick={handleGoToPayment}
-                                    />
+                                    /> */}
                                     <FaStar
                                         className="m-2"
                                         size={24}
