@@ -42,55 +42,55 @@ function NavBar({ onSearch }) {
 
 
   return (
-    <Navbar expand="lg" className='header'>
-      <Container fluid>
-        <div className='tituloMG'>
-          <Navbar.Brand href="#">MG TECHNOLOGY</Navbar.Brand>
-        </div>
+  <Navbar expand="lg" className="header sticky-top">
+    <Container fluid>
+      <div className="tituloMG">
+        <Navbar.Brand href="#">MG TECHNOLOGY</Navbar.Brand>
+      </div>
 
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-            <NavDropdown title="Contacto" id="navbarScrollingDropdown">
-              <NavDropdown.Item as={Link} to="/Informacion">CONTACTO</NavDropdown.Item>
-              <NavDropdown.Divider />
-            </NavDropdown>
-          </Nav>
+      <Navbar.Toggle aria-controls="navbarScroll" />
+      <Navbar.Collapse id="navbarScroll">
+        <Nav className="me-auto my-2 my-lg-0" navbarScroll>
+          <NavDropdown title="Contacto" id="navbarScrollingDropdown">
+            <NavDropdown.Item as={Link} to="/Informacion">CONTACTO</NavDropdown.Item>
+            <NavDropdown.Divider />
+          </NavDropdown>
 
-          <Form className="d-flex mx-auto" onSubmit={handleSearch}>
-            <Form.Control
-              type="search"
-              placeholder="Buscar productos"
-              className="me-2 search-bar"
-              aria-label="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button className="search-button" type="submit">Buscar</button>
-          </Form>
+          <Nav.Link as={Link} to="/carrito">
+            <FaShoppingCart size={20} />
+          </Nav.Link>
+          <Nav.Link as={Link} to="/historial">
+            <FaHistory size={20} />
+          </Nav.Link>
+        </Nav>
 
-          <Nav className="ml-auto d-flex align-items-center">
-            <Nav.Link as={Link} to="/carrito">
-              <FaShoppingCart size={20} />
-            </Nav.Link>
-            <Nav.Link as={Link} to="/historial">
-              <FaHistory size={20} />
-            </Nav.Link>
+        <Form className="d-flex mx-auto" onSubmit={handleSearch}>
+          <Form.Control
+            type="search"
+            placeholder="Buscar productos"
+            className="me-2 search-bar"
+            aria-label="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button className="search-button btn btn-primary" type="submit">Buscar</button>
+        </Form>
 
-            <button className='botton' variant="outline-success">
-              <Link to='/Login'>REGISTRO</Link>
-            </button>
+      
+        <Nav className="ms-auto d-flex align-items-center">
+          <Link to='/Login'>
+            <button className="search-button btn btn-primary mx-2">REGISTRO</button>
+          </Link>
 
-
-            <button className='botton' variant="outline-danger" onClick={handleLogout}>
-              Cerrar Sesión
-            </button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
-}
+          <button className="search-button btn btn-primary mx-2" onClick={handleLogout}>
+            Cerrar Sesión
+          </button>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
+);
+};
 
 export default NavBar;
 
