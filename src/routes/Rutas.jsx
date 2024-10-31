@@ -28,7 +28,7 @@ function Rutas() {
 
       <Route path='/confirmacion' element={<Confirma />} />
       <Route path='/carrito' element={<Carrito />} />
-      <Route path='/producto_id/Reseña' element={<Valoracion />} />
+      <Route path=':producto_id/Resena' element={<Valoracion />} />
       <Route path='/historial' element={<Histo />} />
     </Routes>
   );

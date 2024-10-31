@@ -52,6 +52,69 @@ textarea:focus {
   transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
 }
 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+}
+
+.login-card {
+  position: relative;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  background: linear-gradient(135deg, #c3a2ff, #23fffd);
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white;
+}
+
+.login-card h2 {
+  margin-bottom: 1rem;
+  font-size: 24px;
+}
+
+.login-card input {
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  width: 100%;
+  background: #ffffff;
+  color: #333;
+}
+
+.login-card .search-button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 25px;
+  /* background: linear-gradient(135deg, #23fffd , #c3a2ff); */
+  color: white;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-card .search-button:hover {
+  background: linear-gradient(135deg, #c3a2ff, #23fffd);
+}
+
+.login-card .link {
+  color: white;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+
+
+
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 /* Fondo principal */

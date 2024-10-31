@@ -56,10 +56,10 @@ const Register = () => {
     };
 
     return (
-        <div className='d-flex justify-content-center align-items-center vh-100'>
-            <div className="card p-4 shadow-sm" style={{ width: '100%', maxWidth: '400px', borderRadius: '15px' }}>
+        <div className="login-container d-flex justify-content-center align-items-center vh-100">
+            <div className="login-card p-4">
                 <h1 className="text-center mb-4">REGISTRO</h1>
-
+    
                 <form onSubmit={boton}> 
                     <div className="mb-3">
                         <label htmlFor="nombre" className="form-label">Nombre</label>
@@ -72,7 +72,7 @@ const Register = () => {
                             onChange={(e) => setNombre(e.target.value)}
                         />
                     </div>
-
+    
                     <div className="mb-3">
                         <label htmlFor="apellido" className="form-label">Apellido</label>
                         <input
@@ -84,7 +84,7 @@ const Register = () => {
                             onChange={(e) => setApellido(e.target.value)}
                         />
                     </div>
-
+    
                     <div className="mb-3">
                         <label htmlFor="contrasena" className="form-label">Contraseña</label>
                         <input
@@ -96,7 +96,7 @@ const Register = () => {
                             onChange={(e) => setContraseña(e.target.value)}
                         />
                     </div>
-
+    
                     <div className="mb-3">
                         <label htmlFor="correo" className="form-label">Correo Electrónico</label>
                         <input
@@ -108,12 +108,13 @@ const Register = () => {
                             onChange={(e) => setCorreo(e.target.value)}
                         />
                     </div>
-
-                    <button type="submit" className="btn btn-primary w-100">REGISTRAR</button>
+    
+                    <button type="submit" className="search-button w-100">REGISTRAR</button>
                 </form>
             </div>
         </div>
     );
+    
 };
 
 export default Register;

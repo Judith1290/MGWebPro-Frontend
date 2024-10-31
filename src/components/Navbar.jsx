@@ -4,23 +4,49 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaHistory } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import { logout } from '../service/registe'
+
 
 function NavBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
     onSearch(searchTerm);
   };
 
+  const handleLogout = async () => {
+    const result = await logout();
+
+    if (result) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Logout exitoso',
+        text: 'Has cerrado sesión correctamente',
+      });
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error al intentar cerrar sesión',
+      });
+    }
+  };
+
+
   return (
     <Navbar expand="lg" className='header'>
       <Container fluid>
-
-
-        <div className='tituloMG'><Navbar.Brand href="#">MG TECHNOLOGY</Navbar.Brand></div>
+        <div className='tituloMG'>
+          <Navbar.Brand href="#">MG TECHNOLOGY</Navbar.Brand>
+        </div>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -31,29 +57,33 @@ function NavBar({ onSearch }) {
             </NavDropdown>
           </Nav>
 
-
           <Form className="d-flex mx-auto" onSubmit={handleSearch}>
             <Form.Control
               type="search"
               placeholder="Buscar productos"
-              className="me-2 search-bar"  
+              className="me-2 search-bar"
               aria-label="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="search-button" type="submit">Buscar</button>  
+            <button className="search-button" type="submit">Buscar</button>
           </Form>
-
 
           <Nav className="ml-auto d-flex align-items-center">
             <Nav.Link as={Link} to="/carrito">
               <FaShoppingCart size={20} />
             </Nav.Link>
-            <Nav.Link as={Link} to="/Histo"> 
-              <FaHistory size={20} /> 
+            <Nav.Link as={Link} to="/historial">
+              <FaHistory size={20} />
             </Nav.Link>
+
             <button className='botton' variant="outline-success">
               <Link to='/Login'>REGISTRO</Link>
+            </button>
+
+
+            <button className='botton' variant="outline-danger" onClick={handleLogout}>
+              Cerrar Sesión
             </button>
           </Nav>
         </Navbar.Collapse>

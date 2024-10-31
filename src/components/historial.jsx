@@ -42,7 +42,7 @@ const Historial = () => {
               <div className="col-md-4 mb-4" key={index}>
                 <div className="card border-primary">
                   <div className="card-body">
-                    <h5 className="card-title">Pago ID: {pago.pago_id}</h5>
+                    {/* <h5 className="card-title">Pago ID: {pago.pago_id}</h5> */}
                     <h5 className="card-title">ID transaccion: {pago.payment_intent_id}</h5>
                     <p className="card-text">
                       <strong>Fecha:</strong> {new Date(pago.fecha_creacion).toLocaleDateString()}<br />

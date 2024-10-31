@@ -15,6 +15,7 @@ const Reseña = () => {
   const handleRangeChange = (e) => {
     setValor(e.target.value);
   };
+  console.log(producto_id);
 
   // Verificar el estado de login
   useEffect(() => {
@@ -31,7 +32,7 @@ const Reseña = () => {
     checkLogin();
   }, []);
 
-  // Obtener las reseñas del producto cuando el componente se monta
+  // Obtener las reseñas del producto 
   useEffect(() => {
     if (!producto_id) return;
 
