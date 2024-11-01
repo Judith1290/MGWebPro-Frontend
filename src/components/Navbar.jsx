@@ -22,13 +22,17 @@ function NavBar({ onSearch }) {
 
   const handleLogout = async () => {
     const result = await logout();
+    sessionStorage.removeItem("permission")
 
     if (result) {
       Swal.fire({
         icon: 'success',
-        title: 'Logout exitoso',
+        title: 'Cierre de sesión exitoso',
         text: 'Has cerrado sesión correctamente',
       });
+
+      // Actualiza el estado de `update`
+      setUpdate(update + 1);
     } else {
       Swal.fire({
         icon: 'error',
@@ -36,8 +40,9 @@ function NavBar({ onSearch }) {
         text: 'Error al intentar cerrar sesión',
       });
     }
-    navigate("/Login")
-    setUpdate(update + 1);
+
+    // Navegar a la página de login
+    navigate("/Login");
   };
 
   return (
@@ -82,12 +87,12 @@ function NavBar({ onSearch }) {
             </Link>
 
             {/* Botón de cerrar sesión */}
-            <button className="search-button btn btn-primary mx-2" onClick={() => handleLogout()}>
+            <button className="search-button btn btn-primary mx-2" onClick={handleLogout}>
               Cerrar Sesión
             </button>
 
             {/* Mostrar el botón "Admi" solo si el rol es 1 o 2 */}
-            {(permission === '1' || permission === '2') && (
+            {(permission == '1' || permission == '2') && (
               <Link to='/Administrador'>
                 <button className="search-button btn btn-primary mx-2">Admi</button>
               </Link>
@@ -97,9 +102,8 @@ function NavBar({ onSearch }) {
       </Container>
     </Navbar>
   );
-};
+}
 
 export default NavBar;
-
 
 

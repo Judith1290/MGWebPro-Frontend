@@ -31,9 +31,9 @@ const Logincom = () => {
                     title: 'Login exitoso',
                     text: 'Has iniciado sesión correctamente',
                 });
+                setUpdate(update + 1)
                 setTimeout(() => {
                     navigate('/');
-                    setUpdate(update + 1)
                 }, 1000);
             } else {
                 const errorData = await response.json();
