@@ -409,10 +409,56 @@ textarea:focus {
   transform: scale(1.05);
   /* Efecto de aumento al pasar el ratón */
 }
+
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .header.sticky-top {
   background-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1030;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* Asegura que los botones tengan el mismo estilo y espaciado
+.header .btn {
+  width: 100%;
+  margin-bottom: 10px; /* Espaciado entre botones */
+/* } */
+*/ .header .tituloMG {
+  text-align: center;
+  /* Centra el título en la barra */
+}
+
+@media (max-width: 768px) {
+
+  /* Para pantallas más pequeñas */
+  .navbar-collapse {
+    text-align: center;
+    /* Asegura que todo esté centrado */
+  }
+
+  .navbar-nav {
+    margin-top: 15px;
+  }
+
+  .search-bar,
+  .search-button {
+    width: 100%;
+    /* Asegura que el campo de búsqueda sea 100% ancho */
+    margin-bottom: 10px;
+  }
+
+  .nav-link,
+  .navbar-brand {
+    font-size: 14px;
+    /* Ajusta el tamaño de las letras para móviles */
+  }
+
+  .botton {
+    margin-bottom: 10px;
+    /* Espaciado entre los botones de REGISTRO y Cerrar Sesión */
+    width: 10%;
+    /* Asegura que los botones ocupen el ancho completo en móviles */
+  }
 }

@@ -7,6 +7,7 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const permission = sessionStorage.getItem('permission') || null;
+  const [update, setUpdate] = useState(1)
 
   useEffect(() => {
     const getData = async () => {
@@ -23,9 +24,9 @@ export const AuthProvider = ({ children }) => {
       }
     };
     getData().then((data) => sessionStorage.setItem('permission', data.rol));
-  }, []);
+  }, [update]);
 
   return (
-    <AuthContext.Provider value={{ permission }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ permission, update, setUpdate }}>{children}</AuthContext.Provider>
   );
 };
