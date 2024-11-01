@@ -24,14 +24,28 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    getData().then((data) => {
-      if (data && data.rol !== undefined) {
-        sessionStorage.setItem('permission', data.rol);
-        setPermission(data.rol);  // Actualizar el estado local de permission
-        console.log('Valor de permission actualizado:', data.rol);
-      }
-    });
-  }, [update]);
+  //   getData().then((data) => {
+  //     if (data && data.rol !== undefined) {
+  //       sessionStorage.setItem('permission', data.rol);
+  //       setPermission(data.rol);  // Actualizar el estado local de permission
+  //       console.log('Valor de permission actualizado:', data.rol);
+  //     }
+  //   });
+  // }, [update]);
+
+
+  getData().then((data) => {
+    if (data && data.rol !== undefined) {
+      sessionStorage.setItem('permission', data.rol);
+      setPermission(data.rol);  // Actualizar el estado local de permission
+      console.log('Valor de permission actualizado en useEffect:', data.rol);
+    } else {
+      // Si no hay datos, limpia el permiso
+      sessionStorage.removeItem('permission');
+      setPermission(null); // O establece permission a "" si prefieres
+    }
+  });
+}, [update]);
 
   console.log('Valor actual de permission desde sessionStorage:', permission);
 

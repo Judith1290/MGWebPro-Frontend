@@ -33,6 +33,7 @@ function NavBar({ onSearch }) {
 
       // Actualiza el estado de `update`
       setUpdate(update + 1);
+      setPermission(null);
     } else {
       Swal.fire({
         icon: 'error',
