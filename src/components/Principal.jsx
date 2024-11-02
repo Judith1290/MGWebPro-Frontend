@@ -7,12 +7,14 @@ import Swal from 'sweetalert2';
 import { addToCart } from '../service/cartService';
 import { fetchUsuario } from '../service/principal';
 import { useNavigate } from 'react-router-dom';
+import { pagopos } from '../service/pagos';
 
 const Principal = () => {
     const navigate = useNavigate();
     const { productos } = useContext(ProductContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [usuario, setUsuario] = useState(null);
+    const [cantidadProductos, setCantidadProductos] = useState({});
 
     const handleSearch = (term) => {
         setSearchTerm(term);
@@ -51,12 +53,36 @@ const Principal = () => {
         }
     };
 
-    const handleGoToPayment = () => {
-        console.log('Ir a pago');
+    const handleGoToPayment = async (producto) => {
+    
+        const cantidad = cantidadProductos[producto.producto_id] || 1; 
+        const payload = {
+            producto: producto.producto_id,
+            cantidad: cantidad
+        };
+    
+        try {
+            const result = await pagopos(payload);
+            window.location.replace(result)
+        } catch (error) {
+            console.error('Error en el pago:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en el pago',
+                text: 'Hubo un problema al procesar el pago, por favor inténtelo de nuevo.',
+            });
+        }
     };
 
     const handleGoToResena = (producto_id) => {
-        navigate(`${producto_id}/Reseña`);
+        navigate(`${producto_id}/Resena`);
+    };
+
+    const handleCantidadChange = (producto_id, value) => {
+        setCantidadProductos(prevState => ({
+            ...prevState,
+            [producto_id]: value
+        }));
     };
 
     return (
@@ -77,19 +103,27 @@ const Principal = () => {
                             <div key={producto.producto_id} className="producto-item">
                                 <h3>{producto.nombre}</h3>
                                 <img
-                                src={producto.imagen}
-                                alt={producto.nombre}
-                                className="img-fluid"
-                                style={{
-                                    width: '150px',
-                                    height: '150px',
-                                    objectFit: 'cover',
-                                    borderRadius: '8px'
-                                }}
-                            />
-                                
+                                    src={producto.imagen}
+                                    alt={producto.nombre}
+                                    className="img-fluid"
+                                    style={{
+                                        width: '150px',
+                                        height: '150px',
+                                        objectFit: 'cover',
+                                        borderRadius: '8px'
+                                    }}
+                                />
                                 <p>{producto.descripcion}</p>
-                                <p>Precio: {producto.precio} CRC</p>
+                                <p>Precio: {Number(producto.precio).toLocaleString('es-ES')} CRC</p>
+                                <input
+                                    type="number"
+                                    value={cantidadProductos[producto.producto_id] || 1}
+                                    min="1"
+                                    onChange={(e) => handleCantidadChange(producto.producto_id, parseInt(e.target.value))}
+                                    className="form-control mb-2"
+                                    style={{ width: '80px', margin: '0 auto' }}
+                                />
+
                                 <div className="d-flex justify-content-center">
                                     <FaShoppingCart
                                         className="m-2"
@@ -101,7 +135,7 @@ const Principal = () => {
                                         className="m-2"
                                         size={24}
                                         style={{ cursor: 'pointer', color: 'green' }}
-                                        onClick={handleGoToPayment}
+                                        onClick={() => handleGoToPayment(producto)}
                                     />
                                     <FaStar
                                         className="m-2"

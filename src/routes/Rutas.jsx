@@ -8,6 +8,7 @@ import Carrito from '../pages/carrito';
 import Valoracion from '../pages/valoracion';
 import Histo from '../pages/histo';
 import PrivateRoutes from './PrivateRoutes';
+import Confirma from '../pages/confirma';
 
 function Rutas() {
   return (
@@ -24,9 +25,11 @@ function Rutas() {
           </PrivateRoutes>
         }
       />
+
+      <Route path='/confirmacion' element={<Confirma />} />
       <Route path='/carrito' element={<Carrito />} />
-      <Route path=':producto_id/Reseña' element={<Valoracion />} />
-      <Route path=':historial' element={<Histo />} />
+      <Route path=':producto_id/Resena' element={<Valoracion />} />
+      <Route path='/historial' element={<Histo />} />
     </Routes>
   );
 }

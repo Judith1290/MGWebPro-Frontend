@@ -61,7 +61,7 @@ const Contacto = () => {
               <label className="form-label">Mensaje:</label>
               <textarea className="form-control animacion" name="message" value={formData.message} onChange={handleChange} required />
             </div>
-            <button type="submit" className="btn btn-primary w-100">Enviar</button>
+            <button type="submit" className="search-button w-100">Enviar</button>
           </form>
 
           <div className="mb-4 align-items-center">
