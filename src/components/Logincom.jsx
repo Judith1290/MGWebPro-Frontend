@@ -1,93 +1,86 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { loginUser } from '../service/registe';
+import { useAuthContext } from '../context/AuthContext';
 
 const Logincom = () => {
+    const { update, setUpdate } = useAuthContext();
     const [contrasena, setContrasena] = useState('');
     const [correo, setCorreo] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
         if (!correo.includes('@')) {
             Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Correo electrónico inválido,por favor ingresar@!",
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Correo electrónico inválido, por favor ingresar @!',
             });
             return;
         }
+
         try {
-            const userExists = await getData();
-            const user = userExists.find((user) => user.gmail === correo);
-            if (user) {
-                if (user.contrasena === contrasena) {
-                    console.log("Usuario existe");
-                    if ("admin" === user.tipe) {
-                        navigate('/Administrador');
-                    } else {
-                        navigate('/TodosLosProductos');
-                    }
-                } else {
+            const response = await loginUser(correo, contrasena);
 
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Contraseña incorrecta!",
-
-                    });
-                }
-            } else {
-                console.log("Usuario no existe");
+            if (response.ok) {
                 Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Usuario no existe!",
-
+                    icon: 'success',
+                    title: 'Login exitoso',
+                    text: 'Has iniciado sesión correctamente',
                 });
-
+                setUpdate(update + 1);
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
+            } else {
+                const errorData = await response.json();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: errorData.error || 'Error al intentar iniciar sesión',
+                });
             }
         } catch (error) {
-            console.error("Error al verificar usuario:", error);
-
+            console.error('Error al intentar iniciar sesión:', error);
             Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Error al intentar iniciar sesión!",
-
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error al intentar iniciar sesión!',
             });
         }
     };
 
+    const handleRegresar = () => {
+        navigate('/'); // Redirige a la página principal
+    };
+
     return (
-        <div className="container">
-            <div className="card">
-                <h2 className="title">Iniciar Sesión</h2>
-                <p className="subtitle">¿No tienes una cuenta? <Link to="/Register" className="link">Regístrate</Link></p>
+        <div className="login-container">
+            <div className="login-card">
+                <h2>Iniciar Sesión</h2>
+                <p>
+                    ¿No tienes una cuenta? <Link to="/Register" className="link">Regístrate</Link>
+                </p>
                 <form onSubmit={handleLogin}>
-                    <div className="mb-4">
-                        <label htmlFor="correo" className="block text-sm font-medium">Correo Electrónico</label>
-                        <input
-                            type="text"
-                            id="correo"
-                            className="input"
-                            placeholder="tucorreo@example.com"
-                            value={correo}
-                            onChange={(e) => setCorreo(e.target.value)}
-                        />
+                    <input
+                        type="text"
+                        placeholder="Correo Electrónico"
+                        value={correo}
+                        onChange={(e) => setCorreo(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        value={contrasena}
+                        onChange={(e) => setContrasena(e.target.value)}
+                    />
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                        <button type="submit" className="search-button">Iniciar</button>
+                        <button type="button" className="search-button" onClick={handleRegresar}>Regresar</button>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="contrasena" className="block text-sm font-medium">Contraseña</label>
-                        <input
-                            type="password"
-                            id="contrasena"
-                            className="input"
-                            placeholder="Ingrese 6 caracteres o más"
-                            value={contrasena}
-                            onChange={(e) => setContrasena(e.target.value)}
-                        />
-                    </div>
-                    <button type="submit" className="button">Inicio</button>
                 </form>
             </div>
         </div>

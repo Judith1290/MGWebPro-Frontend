@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { registerUser } from '../service/registe';
 
 const Register = () => {
     const [Nombre, setNombre] = useState('');
@@ -9,108 +11,112 @@ const Register = () => {
     const [correo, setCorreo] = useState('');
     const navigate = useNavigate();
 
-    const boton = async () => {
-        if (!usuario.trim() || !contraseña.trim() || !correo.trim()) {
+    const boton = async (e) => {
+        e.preventDefault();
 
+        if (!Nombre.trim() || !Apellido.trim() || !contraseña.trim() || !correo.trim()) {
             Swal.fire("Por favor, complete todos los campos!");
             return;
         }
+
         if (!correo.includes('@')) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Correo electrónico inválido,por favor ingresar@!",
+                text: "Correo electrónico inválido, por favor ingresar @!",
             });
             return;
         }
-        try {
-            const response = await postData(contraseña, correo);
-            if (response) {
 
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Registro exitoso",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate('/Login');
-            } else {
+        const payload = {
+            first_name: Nombre,
+            last_name: Apellido,
+            email: correo,
+            password: contraseña,
+        };
 
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "usuario ya existente!",
+        const response = await registerUser(payload); 
 
-                });
-            }
-        } catch (error) {
-            console.error('Error al enviar datos:', error);
+        if (response) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registro exitoso",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            navigate('/Login');
+        } else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Registro fallido!",
-
+                text: "Usuario ya existente!",
             });
         }
     };
 
     return (
-        <>
-            <div className='container'>
-                <div className="card">
-                    <h1 className="title">REGISTRO</h1>
-
-                    <div className="mb-4">
-                        <label htmlFor="correo" className="block text-sm font-medium" ></label>
+        <div className="login-container d-flex justify-content-center align-items-center vh-100">
+            <div className="login-card p-4">
+                <h1 className="text-center mb-4">REGISTRO</h1>
+    
+                <form onSubmit={boton}> 
+                    <div className="mb-3">
+                        <label htmlFor="nombre" className="form-label">Nombre</label>
                         <input
                             type="text"
-                            className="block text-sm font-medium"
-                            placeholder='Nombre de usuario'
+                            className="form-control input-neon"
+                            id="nombre"
+                            placeholder="Nombre de usuario"
                             value={Nombre}
                             onChange={(e) => setNombre(e.target.value)}
                         />
                     </div>
-
-                    <div className="mb-4">
-                        <label htmlFor="correo" className="block text-sm font-medium" ></label>
+    
+                    <div className="mb-3">
+                        <label htmlFor="apellido" className="form-label">Apellido</label>
                         <input
                             type="text"
-                            className="block text-sm font-medium"
-                            placeholder='Apellido de usuario'
+                            className="form-control input-neon"
+                            id="apellido"
+                            placeholder="Apellido de usuario"
                             value={Apellido}
                             onChange={(e) => setApellido(e.target.value)}
                         />
                     </div>
-
-                    <div className="mb-4">
-                        <label htmlFor="correo" className="block text-sm font-medium"></label>
+    
+                    <div className="mb-3">
+                        <label htmlFor="contrasena" className="form-label">Contraseña</label>
                         <input
-                            type='password'
-                            className="block text-sm font-medium"
-                            name='contraseña'
-                            id='contraseña'
-                            placeholder='Password'
+                            type="password"
+                            className="form-control input-neon"
+                            id="contrasena"
+                            placeholder="Ingrese su contraseña"
                             value={contraseña}
                             onChange={(e) => setContraseña(e.target.value)}
                         />
                     </div>
-
-                    <div className="mb-4">
-                        <label htmlFor="correo" className="block text-sm font-medium"></label>
+    
+                    <div className="mb-3">
+                        <label htmlFor="correo" className="form-label">Correo Electrónico</label>
                         <input
-                            type='text'
-                            className="block text-sm font-medium"
-                            placeholder='Gmail'
+                            type="email"
+                            className="form-control input-neon"
+                            id="correo"
+                            placeholder="Correo electrónico"
                             value={correo}
                             onChange={(e) => setCorreo(e.target.value)}
                         />
                     </div>
-                    <button onClick={boton} className="button">REGISTRAR</button>
-                </div>
+    
+                    <button type="submit" className="search-button w-100">REGISTRAR</button>
+                </form>
             </div>
-        </>
+        </div>
     );
+    
 };
 
 export default Register;
+
+
