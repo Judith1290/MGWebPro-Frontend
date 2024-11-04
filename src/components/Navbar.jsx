@@ -88,9 +88,7 @@ function NavBar({ onSearch }) {
           <Nav className='ms-auto d-flex align-items-center'>
             {/* Botón de registro */}
             <Link to='/Login'>
-              <button className='search-button btn btn-primary mx-2'>
-                REGISTRO
-              </button>
+              <button className="search-button btn btn-primary mx-2">Login</button>
             </Link>
 
             {/* Botón de cerrar sesión */}
