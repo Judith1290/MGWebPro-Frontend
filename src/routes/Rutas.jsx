@@ -4,11 +4,11 @@ import Registro from '../pages/Registro';
 import Informacion from '../pages/Informacion';
 import PaginaInicio from '../pages/Inicio';
 import Admi from '../pages/Admi';
-import Carrito from '../pages/carrito';
-import Valoracion from '../pages/valoracion';
-import Histo from '../pages/histo';
+import Carrito from '../pages/Carrito';
+import Valoracion from '../pages/Valoracion';
+import Histo from '../pages/Histo';
 import PrivateRoutes from './PrivateRoutes';
-import Confirma from '../pages/confirma';
+import Confirma from '../pages/Confirma';
 
 function Rutas() {
   return (
@@ -25,7 +25,6 @@ function Rutas() {
           </PrivateRoutes>
         }
       />
-
       <Route path='/confirmacion' element={<Confirma />} />
       <Route path='/carrito' element={<Carrito />} />
       <Route path=':producto_id/Resena' element={<Valoracion />} />

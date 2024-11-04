@@ -6,7 +6,9 @@ export const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [permission, setPermission] = useState(sessionStorage.getItem('permission') || null);
+  const [permission, setPermission] = useState(
+    sessionStorage.getItem('permission') || null
+  );
   const [update, setUpdate] = useState(1);
 
   useEffect(() => {
@@ -25,7 +27,6 @@ export const AuthProvider = ({ children }) => {
     };
 
 
-
   getData().then((data) => {
     if (data && data.rol !== undefined) {
       sessionStorage.setItem('permission', data.rol);
@@ -39,10 +40,13 @@ export const AuthProvider = ({ children }) => {
   });
 }, [update]);
 
+
   console.log('Valor actual de permission desde sessionStorage:', permission);
 
   return (
-    <AuthContext.Provider value={{ permission, update, setUpdate }}>
+    <AuthContext.Provider
+      value={{ permission, update, setUpdate, setPermission }}
+    >
       {children}
     </AuthContext.Provider>
   );
