@@ -24,14 +24,6 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-  //   getData().then((data) => {
-  //     if (data && data.rol !== undefined) {
-  //       sessionStorage.setItem('permission', data.rol);
-  //       setPermission(data.rol);  // Actualizar el estado local de permission
-  //       console.log('Valor de permission actualizado:', data.rol);
-  //     }
-  //   });
-  // }, [update]);
 
 
   getData().then((data) => {
@@ -42,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     } else {
       // Si no hay datos, limpia el permiso
       sessionStorage.removeItem('permission');
-      setPermission(null); // O establece permission a "" si prefieres
+      setPermission(null); 
     }
   });
 }, [update]);

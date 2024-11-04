@@ -5,7 +5,7 @@ import { loginUser } from '../service/registe';
 import { useAuthContext } from '../context/AuthContext';
 
 const Logincom = () => {
-    const { update, setUpdate } = useAuthContext()
+    const { update, setUpdate } = useAuthContext();
     const [contrasena, setContrasena] = useState('');
     const [correo, setCorreo] = useState('');
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Logincom = () => {
                     title: 'Login exitoso',
                     text: 'Has iniciado sesión correctamente',
                 });
-                setUpdate(update + 1)
+                setUpdate(update + 1);
                 setTimeout(() => {
                     navigate('/');
                 }, 1000);
@@ -51,6 +51,10 @@ const Logincom = () => {
                 text: 'Error al intentar iniciar sesión!',
             });
         }
+    };
+
+    const handleRegresar = () => {
+        navigate('/'); // Redirige a la página principal
     };
 
     return (
@@ -73,7 +77,10 @@ const Logincom = () => {
                         value={contrasena}
                         onChange={(e) => setContrasena(e.target.value)}
                     />
-                    <button type="submit" className="search-button">Iniciar</button>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                        <button type="submit" className="search-button">Iniciar</button>
+                        <button type="button" className="search-button" onClick={handleRegresar}>Regresar</button>
+                    </div>
                 </form>
             </div>
         </div>

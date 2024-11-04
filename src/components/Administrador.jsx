@@ -16,6 +16,7 @@ function Administrador() {
     const [imageUrl, setImageUrl] = useState('');
     const [modelos, setModelos] = useState([]);
     const [categorias, setCategorias] = useState([]);
+
     const STOCK_UMBRAL = 5;
 
     const handleImageUploadSuccess = (response) => {
@@ -73,6 +74,7 @@ function Administrador() {
             });
         }
     };
+    
 
 
     const authenticator = async () => {
@@ -161,6 +163,8 @@ function Administrador() {
         setEditingId(producto.producto_id);
         setIsEditing(true);
     };
+
+
 
     useEffect(() => {
         fetchModelosYCategorias();
