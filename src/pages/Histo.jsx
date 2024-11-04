@@ -1,5 +1,5 @@
 import React from 'react'
-import Historial from '../components/historial'
+import Historial from '../components/Historial'
 
 const Histo = () => {
   return (
